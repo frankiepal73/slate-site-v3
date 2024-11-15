@@ -42,22 +42,32 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      // Prefetch other routes after initial load
-      const prefetchRoutes = async () => {
-        const routes = ['/get-started', '/watch-demo'];
-        routes.forEach(route => {
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = route;
-          document.head.appendChild(link);
-        });
-      };
-      prefetchRoutes();
-    }, 2500);
+    // Use requestAnimationFrame for smoother loading state transitions
+    const frame = requestAnimationFrame(() => {
+      const timer = window.setTimeout(() => {
+        setIsLoading(false);
+        // Prefetch other routes after initial load
+        const prefetchRoutes = async () => {
+          const routes = ['/get-started', '/watch-demo'];
+          routes.forEach(route => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = route;
+            document.head.appendChild(link);
+          });
+        };
+        prefetchRoutes();
+      }, 2500);
 
-    return () => clearTimeout(timer);
+      return () => {
+        window.clearTimeout(timer);
+        cancelAnimationFrame(frame);
+      };
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Update meta tags based on route

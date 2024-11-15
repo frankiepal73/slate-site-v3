@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bot, SmilePlus, MessageSquare } from 'lucide-react';
 
 export function LoadingScreen() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    // Only set up the timer if the component is visible
+    if (isVisible) {
+      const timer = window.setTimeout(() => {
+        setIsVisible(false);
+      }, 2500);
+
+      // Cleanup function to clear the timer
+      return () => {
+        window.clearTimeout(timer);
+      };
+    }
+  }, [isVisible]);
+
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <div className="fixed inset-0 bg-slate-900 flex items-center justify-center">
+    <div className="fixed inset-0 bg-slate-900 flex items-center justify-center z-50">
       <div className="relative">
         {/* Bot Icon */}
         <div className="absolute -top-16 left-1/2 -translate-x-1/2 animate-chat-bubble">
