@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, ShoppingBag, Database, Users, Star } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CountdownTimer } from './CountdownTimer';
@@ -20,30 +20,18 @@ const socialProof = [
 export function Hero() {
   const navigate = useNavigate();
   const [showDiscount, setShowDiscount] = useState(true);
-  const [hasDiscount, setHasDiscount] = useState(false);
-
-  useEffect(() => {
-    const checkDiscount = () => {
-      const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
-      if (discountTimeLeft) {
-        const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
-        setHasDiscount(timeRemaining > 0);
-      } else {
-        setHasDiscount(false);
-      }
-    };
-
-    // Check initially
-    checkDiscount();
-
-    // Set up interval to check regularly
-    const intervalId = setInterval(checkDiscount, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
+  const [hasDiscount, setHasDiscount] = useState(() => {
+    const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+    if (discountTimeLeft) {
+      const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+      return timeRemaining > 0;
+    }
+    return true;
+  });
 
   const handleTimerComplete = () => {
     setShowDiscount(false);
+    setHasDiscount(false);
     sessionStorage.removeItem('discountTimeLeft');
   };
 

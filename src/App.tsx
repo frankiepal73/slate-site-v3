@@ -8,12 +8,10 @@ const Hero = lazy(() => {
   const component = import('./components/Hero').then(m => ({ default: m.Hero }));
   // Prefetch other components after Hero loads
   import('./components/Features');
-  import('./components/Integrations');
   import('./components/HowItWorks');
   return component;
 });
 const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
-const Integrations = lazy(() => import('./components/Integrations').then(m => ({ default: m.Integrations })));
 const HowItWorks = lazy(() => import('./components/HowItWorks').then(m => ({ default: m.HowItWorks })));
 const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({ default: m.Testimonials })));
 const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })));
@@ -26,9 +24,6 @@ const HomePage = memo(() => (
     <Hero />
     <section id="features" aria-label="Features" className="animate-on-scroll">
       <Features />
-    </section>
-    <section id="integrations" aria-label="Integrations" className="animate-on-scroll">
-      <Integrations />
     </section>
     <section id="how-it-works" aria-label="How It Works" className="animate-on-scroll">
       <HowItWorks />

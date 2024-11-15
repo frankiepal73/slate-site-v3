@@ -81,10 +81,23 @@ export function GetStarted() {
   const [hasDiscount, setHasDiscount] = useState(false);
 
   useEffect(() => {
-    const discountApplied = sessionStorage.getItem('appliedDiscount');
-    if (discountApplied === 'true') {
-      setHasDiscount(true);
-    }
+    const checkDiscount = () => {
+      const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+      if (discountTimeLeft) {
+        const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+        setHasDiscount(timeRemaining > 0);
+      } else {
+        setHasDiscount(false);
+      }
+    };
+
+    // Check initially
+    checkDiscount();
+
+    // Set up interval to check regularly
+    const intervalId = setInterval(checkDiscount, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const validateCurrentStep = () => {
@@ -114,9 +127,13 @@ export function GetStarted() {
     if (currentStep === steps.length - 2) {
       try {
         setIsSubmitting(true);
+        // Check discount status again right before submission
+        const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+        const hasValidDiscount = discountTimeLeft ? (parseInt(discountTimeLeft, 10) - Date.now() > 0) : false;
+        
         const response = await submitFormData({
           ...formData,
-          hasDiscount: hasDiscount.toString()
+          hasDiscount: hasValidDiscount.toString()
         });
         if (response.success) {
           setDirection('forward');
@@ -193,7 +210,7 @@ export function GetStarted() {
 
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
@@ -245,12 +262,12 @@ export function GetStarted() {
           </div>
         )}
 
-        {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 mb-8 overflow-hidden transition-all duration-300 ease-in-out">
+        {/* Form - Adjusted padding here */}
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-8 overflow-hidden transition-all duration-300 ease-in-out">
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`absolute top-0 left-0 w-full h-full p-8 transition-all duration-500 ease-out ${
+              className={`absolute top-0 left-0 w-full h-full p-4 md:p-6 transition-all duration-500 ease-out ${
                 index === currentStep 
                   ? 'opacity-100 translate-x-0'
                   : index < currentStep
