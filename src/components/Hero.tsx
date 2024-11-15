@@ -70,15 +70,8 @@ export function Hero() {
       </div>
 
       {/* Main content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-64">
-        {/* Meet Slate pill */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-64">
         <div className="flex justify-center mb-16">
-          <span className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl text-white/70 text-sm hover:bg-white/10 transition-colors border border-white/10">
-            meet slate
-          </span>
-        </div>
-
-        <div className="flex justify-center mb-8">
           <div className="relative">
             <Bot className="w-24 h-24 text-white/90 animate-pulse" />
             <div className="absolute -inset-4 bg-blue-500/20 blur-xl rounded-full animate-pulse"></div>

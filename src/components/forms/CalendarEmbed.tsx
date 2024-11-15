@@ -65,26 +65,34 @@ export function CalendarEmbed() {
         layout: 'month_view',
       });
 
-      // Listen for calendar events
-      window.addEventListener('message', (e) => {
+      // Listen for calendar events and handle height changes
+      const handleCalMessage = (e: MessageEvent) => {
         if (e.data?.originator === 'Cal' && e.data?.height) {
-          // Add some padding to the height
-          const newHeight = Math.min(Math.max(e.data.height + 40, 600), 800);
+          // Add padding to the height and ensure minimum height
+          const newHeight = Math.max(e.data.height + 40, 600);
           setCalHeight(newHeight);
-        }
-      });
-    }
 
-    // Cleanup
-    return () => {
-      window.removeEventListener('message', () => {});
-    };
+          // Find the parent form container and adjust its height
+          const formContainer = document.querySelector('.bg-white\\/5.backdrop-blur-xl.rounded-2xl');
+          if (formContainer) {
+            (formContainer as HTMLElement).style.height = `${newHeight + 32}px`; // Add padding
+          }
+        }
+      };
+
+      window.addEventListener('message', handleCalMessage);
+
+      // Cleanup
+      return () => {
+        window.removeEventListener('message', handleCalMessage);
+      };
+    }
   }, []);
 
   return (
     <div 
       id="my-cal-inline" 
-      className="w-full bg-white/5 backdrop-blur-xl rounded-xl transition-all duration-300 ease-in-out"
+      className="w-full bg-white/5 backdrop-blur-xl rounded-xl overflow-hidden transition-all duration-300 ease-in-out"
       style={{ height: calHeight }}
     />
   );

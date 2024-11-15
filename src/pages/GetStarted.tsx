@@ -262,21 +262,22 @@ export function GetStarted() {
           </div>
         )}
 
-        {/* Form - Adjusted padding here */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 md:p-6 mb-8 overflow-hidden transition-all duration-300 ease-in-out">
+        {/* Form */}
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 mb-8 overflow-hidden transition-all duration-300 ease-in-out">
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`absolute top-0 left-0 w-full h-full p-4 md:p-6 transition-all duration-500 ease-out ${
-                index === currentStep 
+              className={`
+                ${index === currentStep 
                   ? 'opacity-100 translate-x-0'
                   : index < currentStep
                   ? 'opacity-0 -translate-x-full'
                   : 'opacity-0 translate-x-full'
-              }`}
+                }
+                transition-all duration-500 ease-out
+              `}
               style={{
-                position: index === currentStep ? 'relative' : 'absolute',
-                pointerEvents: index === currentStep ? 'auto' : 'none'
+                display: index === currentStep ? 'block' : 'none'
               }}
             >
               <h2 className="text-2xl font-semibold text-white mb-8">{step.title}</h2>
