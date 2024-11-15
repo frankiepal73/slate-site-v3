@@ -28,7 +28,7 @@ const steps = [
     icon: DollarSign,
     title: "Maximize ROI",
     description: "See immediate impact with increased sales, reduced support costs, and improved customer lifetime value.",
-    highlight: "3x ROI guaranteed"
+    highlight: "Proven ROI"
   }
 ];
 

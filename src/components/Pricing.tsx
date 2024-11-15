@@ -1,17 +1,18 @@
 import React from 'react';
-import { Check, Sparkles, Bot, BarChart, Users, Calendar, MessageSquare, Database, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Check, Sparkles, Bot, BarChart, Users, Calendar, MessageSquare, Database, Zap, ShoppingCart } from 'lucide-react';
 
 const tiers = [
   {
     name: 'Standard Assistant',
-    description: 'Perfect for businesses looking to automate customer interactions',
+    description: 'Perfect for small businesses with < 100 conversations/month',
     price: '1,250',
     billing: 'one-time build',
+    subscription: '20',
     featured: false,
     features: [
       { text: 'Lead Capture + CRM Integration', icon: Database },
       { text: 'Evolving Knowledge Base', icon: Bot },
-      { text: 'Appointment Scheduling', icon: Calendar },
       { text: '24/7 Customer Service', icon: MessageSquare },
     ],
   },
@@ -20,6 +21,7 @@ const tiers = [
     description: 'Enhanced features for growing businesses',
     price: '1,450',
     billing: 'one-time build',
+    subscription: '149',
     featured: false,
     features: [
       { text: 'Everything in Standard', icon: Check },
@@ -28,15 +30,16 @@ const tiers = [
       { text: 'Human Handoff', icon: Users },
       { text: 'Past Conversation Reference', icon: MessageSquare },
       { text: "FAQ Management", icon: Database },
-      { text: 'Calendar Embeds', icon: Calendar },
+      { text: 'Appointment Scheduling', icon: Calendar },
+      { text: 'Smart Product Recommendations', icon: ShoppingCart },
     ],
   },
   {
     name: 'Premium Package',
     description: 'Complete solution with ongoing support',
-    price: '1,450',
+    price: '2,150',
     billing: 'one-time build',
-    subscription: '100',
+    subscription: '249',
     featured: true,
     features: [
       { text: 'Everything in Advanced', icon: Check },
@@ -95,7 +98,7 @@ export function Pricing() {
                     </div>
                     {tier.subscription && (
                       <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-2xl font-bold text-white">+${tier.subscription}</span>
+                        <span className="text-2xl font-bold text-white">${tier.subscription}</span>
                         <span className="text-white/70">/month</span>
                       </div>
                     )}
@@ -110,13 +113,16 @@ export function Pricing() {
                     ))}
                   </div>
 
-                  <button className={`w-full py-4 px-8 rounded-xl font-medium transition-all ${
-                    tier.featured
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25'
-                      : 'bg-white/10 text-white hover:bg-white/20'
-                  }`}>
+                  <Link
+                    to="/get-started"
+                    className={`block w-full py-4 px-8 rounded-xl font-medium text-center transition-all ${
+                      tier.featured
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25'
+                        : 'bg-white/10 text-white hover:bg-white/20'
+                    }`}
+                  >
                     Get Started
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

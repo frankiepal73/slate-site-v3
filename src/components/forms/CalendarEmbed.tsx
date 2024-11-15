@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 declare global {
   interface Window {
@@ -7,6 +7,8 @@ declare global {
 }
 
 export function CalendarEmbed() {
+  const [calHeight, setCalHeight] = useState(600);
+
   useEffect(() => {
     // Initialize Cal.com
     (function (C, A, L) {
@@ -50,7 +52,10 @@ export function CalendarEmbed() {
 
       window.Cal.ns['slate-ai-initial-discovery-call']('inline', {
         elementOrSelector: '#my-cal-inline',
-        config: { layout: 'month_view' },
+        config: { 
+          layout: 'month_view',
+          hideEventTypeDetails: false,
+        },
         calLink: 'frankpalmeri/slate-ai-initial-discovery-call',
       });
 
@@ -59,13 +64,28 @@ export function CalendarEmbed() {
         hideEventTypeDetails: false,
         layout: 'month_view',
       });
+
+      // Listen for calendar events
+      window.addEventListener('message', (e) => {
+        if (e.data?.originator === 'Cal' && e.data?.height) {
+          // Add some padding to the height
+          const newHeight = Math.min(Math.max(e.data.height + 40, 600), 800);
+          setCalHeight(newHeight);
+        }
+      });
     }
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('message', () => {});
+    };
   }, []);
 
   return (
     <div 
       id="my-cal-inline" 
-      className="w-full h-[600px] bg-white/5 backdrop-blur-xl rounded-xl"
+      className="w-full bg-white/5 backdrop-blur-xl rounded-xl transition-all duration-300 ease-in-out"
+      style={{ height: calHeight }}
     />
   );
 }

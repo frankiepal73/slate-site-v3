@@ -3,6 +3,12 @@ import { ShoppingCart, Users, Calendar, MessageSquareMore, Globe, BarChart3, Zap
 
 const features = [
   {
+    icon: MessageSquareMore,
+    title: "24/7 Customer Support",
+    description: "Automate 70%+ of customer support with always-on AI assistance",
+    highlight: "Response in < 30 seconds"
+  },
+  {
     icon: ShoppingCart,
     title: "Smart Product Recommendations",
     description: "AI-powered suggestions that understand your customers' needs",
@@ -19,12 +25,6 @@ const features = [
     title: "Seamless Scheduling",
     description: "Automated booking that integrates with your calendar",
     highlight: "Save 15+ hours weekly"
-  },
-  {
-    icon: MessageSquareMore,
-    title: "24/7 Customer Support",
-    description: "Always-on support with human handoff when needed",
-    highlight: "Response in < 30 seconds"
   },
   {
     icon: Globe,

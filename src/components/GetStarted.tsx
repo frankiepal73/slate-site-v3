@@ -81,10 +81,23 @@ export function GetStarted() {
   const [hasDiscount, setHasDiscount] = useState(false);
 
   useEffect(() => {
-    const discountApplied = sessionStorage.getItem('appliedDiscount');
-    if (discountApplied === 'true') {
-      setHasDiscount(true);
-    }
+    const checkDiscount = () => {
+      const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+      if (discountTimeLeft) {
+        const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+        setHasDiscount(timeRemaining > 0);
+      } else {
+        setHasDiscount(false);
+      }
+    };
+
+    // Check initially
+    checkDiscount();
+
+    // Set up interval to check regularly
+    const intervalId = setInterval(checkDiscount, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const validateCurrentStep = () => {
@@ -114,9 +127,13 @@ export function GetStarted() {
     if (currentStep === steps.length - 2) {
       try {
         setIsSubmitting(true);
+        // Check discount status again right before submission
+        const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+        const hasValidDiscount = discountTimeLeft ? (parseInt(discountTimeLeft, 10) - Date.now() > 0) : false;
+        
         const response = await submitFormData({
           ...formData,
-          hasDiscount: hasDiscount.toString()
+          hasDiscount: hasValidDiscount.toString()
         });
         if (response.success) {
           setDirection('forward');

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, ShoppingBag, Database, Users, Star } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { CountdownTimer } from './CountdownTimer';
 
 const features = [
   { text: 'Multi-language', icon: Globe2 },
@@ -11,16 +12,55 @@ const features = [
 
 const socialProof = [
   { metric: '5.0', label: 'Customer Rating', icon: Star },
-  { metric: '10K+', label: 'Conversations Completed' },
+  { metric: '100K+', label: 'Conversations Completed' },
   { metric: '99.9%', label: 'Uptime' },
   { metric: '20%', label: 'More Appointments Booked' },
 ];
 
 export function Hero() {
   const navigate = useNavigate();
+  const [showDiscount, setShowDiscount] = useState(true);
+  const [hasDiscount, setHasDiscount] = useState(false);
+
+  useEffect(() => {
+    const checkDiscount = () => {
+      const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+      if (discountTimeLeft) {
+        const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+        setHasDiscount(timeRemaining > 0);
+      } else {
+        setHasDiscount(false);
+      }
+    };
+
+    // Check initially
+    checkDiscount();
+
+    // Set up interval to check regularly
+    const intervalId = setInterval(checkDiscount, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleTimerComplete = () => {
+    setShowDiscount(false);
+    sessionStorage.removeItem('discountTimeLeft');
+  };
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-900">
+      {/* Show countdown timer if discount is available */}
+      {showDiscount && (
+        <CountdownTimer 
+          initialMinutes={15} 
+          onComplete={handleTimerComplete}
+        />
+      )}
+      
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 animate-gradient"></div>
       
@@ -100,15 +140,15 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Link 
-            to="/get-started"
+          <button 
+            onClick={handleGetStarted}
             className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl rounded-2xl text-white font-medium overflow-hidden transition-all hover:scale-105"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <span className="relative flex items-center gap-2">
-              Get Started <Sparkles className="w-5 h-5" />
+              Get Started {hasDiscount && <span className="text-blue-400">-10%</span>} <Sparkles className="w-5 h-5" />
             </span>
-          </Link>
+          </button>
           <Link
             to="/watch-demo"
             className="group px-8 py-4 text-white/90 font-medium hover:text-white transition-colors flex items-center gap-2"

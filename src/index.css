@@ -61,6 +61,12 @@
 
   .animate-ticker {
     animation: ticker 30s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-ticker-reverse {
+    animation: tickerReverse 30s linear infinite;
+    will-change: transform;
   }
 
   .animate-chat-bubble {
@@ -137,6 +143,15 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes tickerReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 

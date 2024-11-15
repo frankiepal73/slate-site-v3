@@ -2,11 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { compression } from 'vite-plugin-compression2';
-import path from 'path';
 
 export default defineConfig({
-  root: process.cwd(),
-  base: '/',
   plugins: [
     react(),
     VitePWA({
@@ -41,12 +38,14 @@ export default defineConfig({
     assetsDir: 'assets',
     emptyOutDir: true,
     rollupOptions: {
-      input: path.resolve(__dirname, 'index.html')
+      input: {
+        main: './index.html'
+      }
     }
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': '/src'
     }
   }
 });
