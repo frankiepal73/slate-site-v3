@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#1e293b">
+    
+    <!-- Primary Meta Tags -->
+    <title>Slate | Transform Website Visitors into Customers</title>
+    <meta name="title" content="Slate | Transform Website Visitors into Customers">
+    <meta name="description" content="Slate is your intelligent web assistant that transforms conversations into conversions. Automate customer service, boost sales, and deliver 24/7 support.">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="preload" href="/src/main.tsx" as="script" type="module">
+    <link rel="preconnect" href="https://app.cal.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://app.cal.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- PWA tags -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chatwithslate.com/">
+    <meta property="og:title" content="Slate | Transform Website Visitors into Customers">
+    <meta property="og:description" content="Slate is your intelligent web assistant that transforms conversations into conversions. Automate customer service, boost sales, and deliver 24/7 support.">
+    <meta property="og:image" content="/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://chatwithslate.com/">
+    <meta property="twitter:title" content="Slate | Transform Website Visitors into Customers">
+    <meta property="twitter:description" content="Slate is your intelligent web assistant that transforms conversations into conversions. Automate customer service, boost sales, and deliver 24/7 support.">
+    <meta property="twitter:image" content="/og-image.jpg">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="AI assistant, customer service automation, conversational AI, lead generation, customer support, chatbot, business automation">
+    <meta name="author" content="Slate">
+    <link rel="canonical" href="https://chatwithslate.com/">
+
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://app.cal.com https://images.unsplash.com; script-src 'self' 'unsafe-inline' https://app.cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com data:; font-src 'self' data:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Slate",
+        "applicationCategory": "BusinessApplication",
+        "description": "AI-powered web assistant that transforms conversations into conversions",
+        "offers": {
+          "@type": "Offer",
+          "price": "1250",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "ratingCount": "100"
+        }
+      }
+    </script>
+
+    <!-- Fallback for no JavaScript -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center;">
+        <h1>JavaScript Required</h1>
+        <p>Please enable JavaScript to use Slate AI.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
