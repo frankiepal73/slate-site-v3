@@ -56,8 +56,8 @@ export function Navigation() {
             <Link to="/" className="text-white/70 hover:text-white transition-colors">
               Home
             </Link>
-            <Link to="/why-slate" className="text-white/70 hover:text-white transition-colors">
-              Why Slate
+            <Link to="/why-us" className="text-white/70 hover:text-white transition-colors">
+              Why Us
             </Link>
             <button 
               onClick={() => scrollToSection('features')} 
@@ -108,12 +108,12 @@ export function Navigation() {
               Home
             </Link>
             <Link 
-              to="/why-slate" 
+              to="/why-us" 
               className="block text-white/70 hover:text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
               role="menuitem"
             >
-              Why Slate
+              Why Us
             </Link>
             <button 
               onClick={() => scrollToSection('features')}

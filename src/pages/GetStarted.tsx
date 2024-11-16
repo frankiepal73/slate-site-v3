@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Bot, Building2, Users2, MessageSquare, Calendar, ArrowRight, ArrowLeft, Check, Loader2, Package } from 'lucide-react';
-import { CalendarEmbed } from '../components/forms/CalendarEmbed';
+import { Bot, Building2, Users2, MessageSquare, ArrowRight, ArrowLeft, Check, Loader2, Package, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { submitFormData } from '../services/formService';
 import type { FormData } from '../types/form';
 
@@ -66,19 +66,24 @@ const steps = [
     ]
   },
   {
-    title: "Schedule Demo",
-    icon: Calendar,
-    isCalendar: true
+    title: "Contact Information",
+    icon: Users2,
+    fields: [
+      { label: "Full Name", type: "text", placeholder: "Enter your full name", required: true },
+      { label: "Email", type: "email", placeholder: "you@company.com", required: true }
+    ]
   }
 ];
 
 export function GetStarted() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
   const [direction, setDirection] = useState('forward');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasDiscount, setHasDiscount] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     const checkDiscount = () => {
@@ -91,12 +96,8 @@ export function GetStarted() {
       }
     };
 
-    // Check initially
     checkDiscount();
-
-    // Set up interval to check regularly
     const intervalId = setInterval(checkDiscount, 1000);
-
     return () => clearInterval(intervalId);
   }, []);
 
@@ -124,10 +125,9 @@ export function GetStarted() {
       return;
     }
 
-    if (currentStep === steps.length - 2) {
+    if (currentStep === steps.length - 1) {
       try {
         setIsSubmitting(true);
-        // Check discount status again right before submission
         const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
         const hasValidDiscount = discountTimeLeft ? (parseInt(discountTimeLeft, 10) - Date.now() > 0) : false;
         
@@ -135,9 +135,13 @@ export function GetStarted() {
           ...formData,
           hasDiscount: hasValidDiscount.toString()
         });
+        
         if (response.success) {
-          setDirection('forward');
-          setCurrentStep((prev) => prev + 1);
+          setShowSuccess(true);
+          setTimeout(() => {
+            setShowSuccess(false);
+            navigate('/');
+          }, 3000);
         }
       } catch (err) {
         setError('Failed to submit form. Please try again.');
@@ -281,64 +285,52 @@ export function GetStarted() {
               }}
             >
               <h2 className="text-2xl font-semibold text-white mb-8">{step.title}</h2>
-              {step.isCalendar ? (
-                <CalendarEmbed />
-              ) : (
-                <div className="space-y-6">
-                  {step.fields?.map((field, fieldIndex) => (
-                    <div key={fieldIndex} className="space-y-2">
-                      <label className="block text-sm font-medium text-white/70">
-                        {field.label}
-                        {field.required && <span className="text-red-400 ml-1">*</span>}
-                      </label>
-                      {field.type === 'package-select' ? (
-                        renderPackageSelection(field)
-                      ) : field.type === 'select' ? (
-                        <select
-                          className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
-                          value={formData[`${step.title}-${field.label}`] as string || ''}
-                        >
-                          <option value="">Select an option</option>
-                          {field.options?.map((option: string) => (
-                            <option key={option} value={option}>{option}</option>
-                          ))}
-                        </select>
-                      ) : field.type === 'checkbox' ? (
-                        <div className="space-y-2">
-                          {field.options?.map((option: string) => (
-                            <label key={option} className="flex items-center gap-2">
-                              <input
-                                type="checkbox"
-                                className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500"
-                                checked={formData[`${step.title}-${field.label}-${option}`] === 'true'}
-                                onChange={(e) => handleInputChange(`${step.title}-${field.label}-${option}`, e.target.checked.toString())}
-                              />
-                              <span className="text-white">{option}</span>
-                            </label>
-                          ))}
-                        </div>
-                      ) : field.type === 'textarea' ? (
-                        <textarea
-                          className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          rows={4}
-                          placeholder={field.placeholder}
-                          onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
-                          value={formData[`${step.title}-${field.label}`] as string || ''}
-                        />
-                      ) : (
-                        <input
-                          type={field.type}
-                          className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          placeholder={field.placeholder}
-                          onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
-                          value={formData[`${step.title}-${field.label}`] as string || ''}
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div className="space-y-6">
+                {step.fields?.map((field, fieldIndex) => (
+                  <div key={fieldIndex} className="space-y-2">
+                    <label className="block text-sm font-medium text-white/70">
+                      {field.label}
+                      {field.required && <span className="text-red-400 ml-1">*</span>}
+                    </label>
+                    {field.type === 'package-select' ? (
+                      renderPackageSelection(field)
+                    ) : field.type === 'select' ? (
+                      <select
+                        className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
+                        value={formData[`${step.title}-${field.label}`] as string || ''}
+                      >
+                        <option value="">Select an option</option>
+                        {field.options?.map((option: string) => (
+                          <option key={option} value={option}>{option}</option>
+                        ))}
+                      </select>
+                    ) : field.type === 'checkbox' ? (
+                      <div className="space-y-2">
+                        {field.options?.map((option: string) => (
+                          <label key={option} className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500"
+                              checked={formData[`${step.title}-${field.label}-${option}`] === 'true'}
+                              onChange={(e) => handleInputChange(`${step.title}-${field.label}-${option}`, e.target.checked.toString())}
+                            />
+                            <span className="text-white">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    ) : (
+                      <input
+                        type={field.type}
+                        className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder={field.placeholder}
+                        onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
+                        value={formData[`${step.title}-${field.label}`] as string || ''}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -358,27 +350,56 @@ export function GetStarted() {
             Previous
           </button>
           
-          {currentStep !== steps.length - 1 && (
-            <button
-              onClick={handleNext}
-              disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                <>
-                  Next
-                  <ArrowRight className="w-5 h-5" />
-                </>
-              )}
-            </button>
-          )}
+          <button
+            onClick={handleNext}
+            disabled={isSubmitting}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              <>
+                {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-md mx-4 relative animate-fade-in">
+            <div className="absolute top-4 right-4">
+              <button 
+                onClick={() => setShowSuccess(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <Check className="w-8 h-8 text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+              <p className="text-gray-600 mb-6">
+                Your inquiry has been received. A member of our team will be in touch with you shortly.
+              </p>
+              <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-green-500 rounded-full transition-all duration-300"
+                  style={{ width: '100%' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

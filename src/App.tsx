@@ -17,7 +17,7 @@ const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({
 const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })));
 const GetStarted = lazy(() => import('./pages/GetStarted').then(m => ({ default: m.GetStarted })));
 const WatchDemo = lazy(() => import('./pages/WatchDemo').then(m => ({ default: m.WatchDemo })));
-const WhySlate = lazy(() => import('./pages/WhySlate').then(m => ({ default: m.WhySlate })));
+const WhyUs = lazy(() => import('./pages/WhyUs').then(m => ({ default: m.WhyUs })));
 
 // Memoize route components to prevent unnecessary re-renders
 const HomePage = memo(() => (
@@ -49,7 +49,7 @@ export default function App() {
         setIsLoading(false);
         // Prefetch other routes after initial load
         const prefetchRoutes = async () => {
-          const routes = ['/get-started', '/watch-demo', '/why-slate'];
+          const routes = ['/get-started', '/watch-demo', '/why-us'];
           routes.forEach(route => {
             const link = document.createElement('link');
             link.rel = 'prefetch';
@@ -77,14 +77,14 @@ export default function App() {
       '/': 'Slate AI | Transform Website Visitors into Customers',
       '/get-started': 'Get Started with Slate AI | Setup Your AI Assistant',
       '/watch-demo': 'Watch Slate AI Demo | See AI Customer Service in Action',
-      '/why-slate': 'Why Choose Slate AI | Leading AI Customer Service Solution'
+      '/why-us': 'Why Slate AI | Leading AI Customer Service Solution'
     };
 
     const descriptions: Record<string, string> = {
       '/': 'Transform your customer service with Slate AI. Our intelligent web assistant converts conversations into sales, providing 24/7 automated support.',
       '/get-started': 'Start your journey with Slate AI. Set up your AI assistant in minutes and transform your customer service experience.',
       '/watch-demo': 'Watch Slate AI in action. See how our AI assistant handles customer interactions, qualifies leads, and drives conversions.',
-      '/why-slate': 'Discover why Slate AI is the leading choice for businesses looking to automate and enhance their customer service with artificial intelligence.'
+      '/why-us': 'Discover why Slate AI is the leading choice for businesses looking to automate and enhance their customer service with artificial intelligence.'
     };
 
     document.title = titles[location.pathname] || titles['/'];
@@ -115,9 +115,9 @@ export default function App() {
               <WatchDemo />
             </Suspense>
           } />
-          <Route path="/why-slate" element={
+          <Route path="/why-us" element={
             <Suspense fallback={<LoadingScreen />}>
-              <WhySlate />
+              <WhyUs />
             </Suspense>
           } />
         </Routes>

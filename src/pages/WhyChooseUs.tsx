@@ -85,7 +85,7 @@ const steps = [
   }
 ];
 
-export function WhySlate() {
+export function WhyChooseUs() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export function WhySlate() {
             <Bot className="w-8 h-8 text-blue-400" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Magic</span> Behind Slate
+            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Slate</span>
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
             Take a journey through our sophisticated AI process that turns curious visitors into delighted customers

@@ -5,18 +5,14 @@ export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Only set up the timer if the component is visible
-    if (isVisible) {
-      const timer = window.setTimeout(() => {
-        setIsVisible(false);
-      }, 2500);
+    const timeoutId = setTimeout(() => {
+      setIsVisible(false);
+    }, 2500);
 
-      // Cleanup function to clear the timer
-      return () => {
-        window.clearTimeout(timer);
-      };
-    }
-  }, [isVisible]);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   if (!isVisible) {
     return null;
