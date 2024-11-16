@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { submitFormData } from '../services/formService';
 import type { FormData } from '../types/form';
 
+// Email validation regex
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const packages = [
   {
     name: 'Standard Assistant',
@@ -70,7 +73,13 @@ const steps = [
     icon: Users2,
     fields: [
       { label: "Full Name", type: "text", placeholder: "Enter your full name", required: true },
-      { label: "Email", type: "email", placeholder: "you@company.com", required: true }
+      { label: "Email", type: "email", placeholder: "you@company.com", required: true },
+      { 
+        label: "Contact Consent", 
+        type: "single-checkbox", 
+        text: "I consent to being contacted regarding next steps",
+        required: true 
+      }
     ]
   }
 ];
@@ -82,6 +91,7 @@ export function GetStarted() {
   const [direction, setDirection] = useState('forward');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [hasDiscount, setHasDiscount] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -101,6 +111,10 @@ export function GetStarted() {
     return () => clearInterval(intervalId);
   }, []);
 
+  const validateEmail = (email: string): boolean => {
+    return EMAIL_REGEX.test(email);
+  };
+
   const validateCurrentStep = () => {
     const currentStepData = steps[currentStep];
     if (!currentStepData.fields) return true;
@@ -108,20 +122,43 @@ export function GetStarted() {
     return currentStepData.fields.every(field => {
       if (!field.required) return true;
       const value = formData[`${currentStepData.title}-${field.label}`];
+      
       if (field.type === 'checkbox') {
         return field.options?.some(option => 
           formData[`${currentStepData.title}-${field.label}-${option}`] === 'true'
         );
       }
+
+      if (field.type === 'single-checkbox') {
+        return value === 'true';
+      }
+
+      // Special validation for email field
+      if (field.type === 'email') {
+        if (!value) {
+          setEmailError('Email is required');
+          return false;
+        }
+        if (!validateEmail(value as string)) {
+          setEmailError('Please enter a valid email address');
+          return false;
+        }
+        setEmailError(null);
+        return true;
+      }
+
       return value && value !== '';
     });
   };
 
   const handleNext = async () => {
     setError(null);
+    setEmailError(null);
     
     if (!validateCurrentStep()) {
-      setError('Please fill in all required fields');
+      if (!emailError) {
+        setError('Please fill in all required fields');
+      }
       return;
     }
 
@@ -156,6 +193,7 @@ export function GetStarted() {
 
   const handlePrev = () => {
     setError(null);
+    setEmailError(null);
     setDirection('backward');
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
@@ -163,6 +201,11 @@ export function GetStarted() {
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setError(null);
+
+    // Clear email error when user starts typing
+    if (field.includes('Email')) {
+      setEmailError(null);
+    }
   };
 
   const renderPackageSelection = (field: any) => (
@@ -260,9 +303,9 @@ export function GetStarted() {
         </div>
 
         {/* Error message */}
-        {error && (
+        {(error || emailError) && (
           <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
-            {error}
+            {emailError || error}
           </div>
         )}
 
@@ -288,10 +331,12 @@ export function GetStarted() {
               <div className="space-y-6">
                 {step.fields?.map((field, fieldIndex) => (
                   <div key={fieldIndex} className="space-y-2">
-                    <label className="block text-sm font-medium text-white/70">
-                      {field.label}
-                      {field.required && <span className="text-red-400 ml-1">*</span>}
-                    </label>
+                    {field.type !== 'single-checkbox' && (
+                      <label className="block text-sm font-medium text-white/70">
+                        {field.label}
+                        {field.required && <span className="text-red-400 ml-1">*</span>}
+                      </label>
+                    )}
                     {field.type === 'package-select' ? (
                       renderPackageSelection(field)
                     ) : field.type === 'select' ? (
@@ -319,10 +364,25 @@ export function GetStarted() {
                           </label>
                         ))}
                       </div>
+                    ) : field.type === 'single-checkbox' ? (
+                      <label className="flex items-center gap-2 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500"
+                          checked={formData[`${step.title}-${field.label}`] === 'true'}
+                          onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.checked.toString())}
+                        />
+                        <span className="text-white group-hover:text-white/90 transition-colors">
+                          {field.text}
+                          {field.required && <span className="text-red-400 ml-1">*</span>}
+                        </span>
+                      </label>
                     ) : (
                       <input
                         type={field.type}
-                        className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className={`w-full bg-white/10 border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                          field.type === 'email' && emailError ? 'border-red-500' : 'border-white/10'
+                        }`}
                         placeholder={field.placeholder}
                         onChange={(e) => handleInputChange(`${step.title}-${field.label}`, e.target.value)}
                         value={formData[`${step.title}-${field.label}`] as string || ''}
