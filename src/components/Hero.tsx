@@ -11,10 +11,10 @@ const features = [
 ];
 
 const socialProof = [
-  { metric: '5.0', label: 'Customer Rating', icon: Star },
+  { metric: '4.98', label: 'Customer Rating', icon: Star },
   { metric: '100K+', label: 'Conversations Completed' },
   { metric: '99.9%', label: 'Uptime' },
-  { metric: '20%', label: 'More Appointments Booked' },
+  { metric: '24%', label: 'More Appointments Booked' },
 ];
 
 export function Hero() {
@@ -71,7 +71,7 @@ export function Hero() {
 
       {/* Main content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-64">
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-8">
           <div className="relative">
             <Bot className="w-24 h-24 text-white/90 animate-pulse" />
             <div className="absolute -inset-4 bg-blue-500/20 blur-xl rounded-full animate-pulse"></div>
@@ -123,11 +123,11 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button 
             onClick={handleGetStarted}
-            className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl rounded-2xl text-white font-medium overflow-hidden transition-all hover:scale-105"
+            className="group relative px-8 py-4 bg-blue-500 rounded-2xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
             <span className="relative flex items-center gap-2">
-              Get Started {hasDiscount && <span className="text-blue-400">-10%</span>} <Sparkles className="w-5 h-5" />
+              Create Your Chatbot {hasDiscount && <span className="text-blue-100">-10%</span>} <Sparkles className="w-5 h-5" />
             </span>
           </button>
           <Link

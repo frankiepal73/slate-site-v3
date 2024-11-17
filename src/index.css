@@ -90,6 +90,10 @@
     animation: emoji 2s ease-in-out infinite;
   }
 
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
   /* iOS momentum scrolling */
   .momentum-scroll {
     -webkit-overflow-scrolling: touch;
@@ -175,5 +179,14 @@
   }
   50% {
     transform: rotate(10deg) scale(1.2);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
   }
 }

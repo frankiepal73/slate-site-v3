@@ -22,9 +22,7 @@ export function Navigation() {
       const navHeight = 80;
       const sectionTop = section.offsetTop - navHeight;
       
-      // Check if we're on the home page
       if (location.pathname !== '/') {
-        // Navigate to home page first, then scroll
         window.location.href = `/#${sectionId}`;
       } else {
         window.scrollTo({
@@ -59,6 +57,9 @@ export function Navigation() {
             <Link to="/why-us" className="text-white/70 hover:text-white transition-colors">
               Why Us
             </Link>
+            <Link to="/how-this-works" className="text-white/70 hover:text-white transition-colors">
+              How It Works
+            </Link>
             <button 
               onClick={() => scrollToSection('features')} 
               className="text-white/70 hover:text-white transition-colors"
@@ -75,7 +76,7 @@ export function Navigation() {
               to="/get-started"
               className="px-6 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
             >
-              Get Started
+              Create Your Chatbot +
             </Link>
           </div>
 
@@ -115,6 +116,14 @@ export function Navigation() {
             >
               Why Us
             </Link>
+            <Link 
+              to="/how-this-works" 
+              className="block text-white/70 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+              role="menuitem"
+            >
+              How It Works
+            </Link>
             <button 
               onClick={() => scrollToSection('features')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
@@ -135,7 +144,7 @@ export function Navigation() {
               onClick={() => setIsMobileMenuOpen(false)}
               role="menuitem"
             >
-              Get Started
+              Create Your Chatbot +
             </Link>
           </div>
         </div>

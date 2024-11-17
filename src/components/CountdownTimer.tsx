@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Timer } from 'lucide-react';
 
 interface CountdownTimerProps {
@@ -20,13 +20,19 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
   });
 
   const [isCompact, setIsCompact] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout>();
+  const compactTimerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const compactTimer = setTimeout(() => {
+    compactTimerRef.current = setTimeout(() => {
       setIsCompact(true);
     }, 5000);
 
-    return () => clearTimeout(compactTimer);
+    return () => {
+      if (compactTimerRef.current) {
+        clearTimeout(compactTimerRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -36,11 +42,13 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
       return;
     }
 
-    const timer = setInterval(() => {
+    timerRef.current = setInterval(() => {
       setTimeLeft(prevTime => {
         const newTime = prevTime - 1000;
         if (newTime <= 0) {
-          clearInterval(timer);
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+          }
           sessionStorage.removeItem('discountTimeLeft');
           onComplete();
           return 0;
@@ -49,7 +57,11 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
   }, [timeLeft, onComplete]);
 
   if (timeLeft <= 0) return null;

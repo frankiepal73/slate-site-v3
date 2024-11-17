@@ -33,10 +33,15 @@ export default defineConfig({
     }),
     compression()
   ],
+  server: {
+    port: 5173,
+    host: true
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
+    sourcemap: true,
     rollupOptions: {
       input: {
         main: './index.html'

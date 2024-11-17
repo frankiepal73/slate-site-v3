@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Bot, SmilePlus, MessageSquare } from 'lucide-react';
 
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setIsVisible(false);
     }, 2500);
 
     return () => {
-      clearTimeout(timeoutId);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, []);
 
