@@ -130,6 +130,21 @@ export function GetStarted() {
 
   const currentStepData = steps[currentStep];
 
+  const getBuyButtonId = (selectedPackage: string | undefined | boolean) => {
+    if (typeof selectedPackage !== 'string') return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of';
+    
+    switch (selectedPackage) {
+      case 'Standard Assistant':
+        return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of';
+      case 'Advanced Assistant':
+        return 'buy_btn_1QMLlGIKUom0H2xV8H8ecT5L';
+      case 'Premium Package':
+        return 'buy_btn_1QMLTCIKUom0H2xVh0Xx9yZ5';
+      default:
+        return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of'; // Default to Standard
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,11 +176,9 @@ export function GetStarted() {
         <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
-            {currentStepData.subtitle && (
-              <p className="text-white/70 mb-8">
-                After payment, you'll receive an email with onboarding information. <span className="font-bold text-blue-400">Please complete the form or schedule your agent design session with the team within 24 hours</span> to ensure your agent is delivered on time.
-              </p>
-            )}
+            <p className="text-white/70 mb-8">
+              After payment, you'll receive an email with onboarding information. <span className="font-bold text-blue-400">Please complete the form or schedule your agent design session with the team within 24 hours</span> to ensure your agent is delivered on time.
+            </p>
             <div className="space-y-6">
               {currentStepData.fields?.map((field, fieldIndex) => (
                 <div key={fieldIndex}>
@@ -176,7 +189,7 @@ export function GetStarted() {
                       field={field}
                       value={formData[`${currentStepData.title}-${field.label}`]}
                       onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
-                      error={field.type === 'email' ? emailError : undefined}
+                      error={field.type === 'email' ? emailError || undefined : undefined}
                       stepTitle={currentStepData.title}
                     />
                   )}
@@ -187,7 +200,7 @@ export function GetStarted() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <button
             onClick={handlePrev}
             className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
@@ -201,23 +214,33 @@ export function GetStarted() {
             Previous
           </button>
           
-          <button
-            onClick={handleNext}
-            disabled={isSubmitting}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Submitting...
-              </>
-            ) : (
-              <>
-                {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
-                <ArrowRight className="w-5 h-5" />
-              </>
-            )}
-          </button>
+          {currentStep !== steps.length - 1 ? (
+            <button
+              onClick={handleNext}
+              disabled={isSubmitting}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  Next
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
+            </button>
+          ) : (
+            <div className="stripe-button-container">
+              <stripe-buy-button
+                buy-button-id={getBuyButtonId(formData['Select Package-Package'])}
+                publishable-key="pk_live_51Q6wvdIKUom0H2xVCF8pKbUqC6ytSEbhKRdNCcSX6WOSLbojVlWUv3Cm22H9fYJOzhS82WPTKIKbt3uZArqzldZq006lE87hpc"
+              >
+              </stripe-buy-button>
+            </div>
+          )}
         </div>
       </div>
 
