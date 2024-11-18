@@ -200,10 +200,10 @@ export function GetStarted() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="flex justify-between items-center">
           <button
             onClick={handlePrev}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all w-full sm:w-auto ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
               currentStep === 0
                 ? 'opacity-50 cursor-not-allowed'
                 : 'hover:bg-white/10'
@@ -218,7 +218,7 @@ export function GetStarted() {
             <button
               onClick={handleNext}
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10 w-full sm:w-auto justify-center"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
             >
               {isSubmitting ? (
                 <>
@@ -233,7 +233,7 @@ export function GetStarted() {
               )}
             </button>
           ) : (
-            <div className="w-full sm:w-auto">
+            <div>
               <stripe-buy-button
                 buy-button-id={getBuyButtonId(formData['Select Package-Package'])}
                 publishable-key="pk_live_51Q6wvdIKUom0H2xVCF8pKbUqC6ytSEbhKRdNCcSX6WOSLbojVlWUv3Cm22H9fYJOzhS82WPTKIKbt3uZArqzldZq006lE87hpc"
