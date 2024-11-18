@@ -177,7 +177,7 @@ export function GetStarted() {
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
             <p className="text-white/70 mb-8">
-              After payment, you'll receive an email with onboarding information. <span className="font-bold text-blue-400">Please complete the form or schedule your agent design session with the team within 24 hours</span> to ensure your agent is delivered on time.
+              {/* Removed the onboarding text */}
             </p>
             <div className="space-y-6">
               {currentStepData.fields?.map((field, fieldIndex) => (
