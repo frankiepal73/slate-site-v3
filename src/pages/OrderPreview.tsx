@@ -51,7 +51,7 @@ const ProductDisplay = ({ packageDetails }: { packageDetails: PackageDetails }) 
         </div>
       </div>
     </div>
-    <form action="http://localhost:4242/create-checkout-session" method="POST" className="w-full">
+    <form action="/create-checkout-session" method="POST" className="w-full">
       <input type="hidden" name="package" value={packageDetails.name} />
       <button 
         type="submit"
