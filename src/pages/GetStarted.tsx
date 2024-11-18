@@ -80,9 +80,25 @@ export function GetStarted() {
         const response = await submitFormData(formData);
         
         if (response.success) {
-          setShowSuccess(true);
+          // Create checkout session
           const selectedPackage = formData['Select Package-Package'];
-          navigate(`/order-preview?package=${encodeURIComponent(selectedPackage)}`);
+          try {
+            const checkoutResponse = await fetch('https://chatwithslate.com/create-checkout-session', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                package: selectedPackage
+              }),
+            });
+
+            const { url } = await checkoutResponse.json();
+            window.location.href = url;
+          } catch (error) {
+            console.error('Error creating checkout session:', error);
+            setError('Failed to create checkout session. Please try again.');
+          }
         }
       } catch (err) {
         setError('Failed to submit form. Please try again.');
