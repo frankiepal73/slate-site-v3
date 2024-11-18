@@ -173,7 +173,7 @@ export function GetStarted() {
         )}
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
+        <div className="bg-white/5 backdrop-blur-xl p-4 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
             <p className="text-white/70 mb-8">
