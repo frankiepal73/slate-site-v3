@@ -83,7 +83,7 @@ export function GetStarted() {
           // Create checkout session
           const selectedPackage = formData['Select Package-Package'];
           try {
-            const checkoutResponse = await fetch('https://chatwithslate.com/create-checkout-session', {
+            const checkoutResponse = await fetch('/api/create-checkout-session', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
