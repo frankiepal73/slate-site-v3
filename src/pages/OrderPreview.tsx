@@ -29,39 +29,45 @@ function isValidPackage(key: string): key is keyof typeof packages {
   return key in packages;
 }
 
-const ProductDisplay = ({ packageDetails }: { packageDetails: PackageDetails }) => (
-  <section className="flex flex-col items-center justify-center max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 w-full mb-8">
-      <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
-      <div className="relative">
-        <h3 className="text-2xl font-semibold text-white mb-4">{packageDetails.name}</h3>
-        <div className="flex flex-col gap-4">
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              ${packageDetails.price}
-            </span>
-            <span className="text-white/70">setup & configuration</span>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              ${packageDetails.subscription}
-            </span>
-            <span className="text-white/70">/month</span>
+const ProductDisplay = ({ packageDetails }: { packageDetails: PackageDetails }) => {
+  const handleCheckout = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Implement checkout logic
+  };
+
+  return (
+    <section className="flex flex-col items-center justify-center max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 w-full mb-8">
+        <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
+        <div className="relative">
+          <h3 className="text-2xl font-semibold text-white mb-4">{packageDetails.name}</h3>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                ${packageDetails.price}
+              </span>
+              <span className="text-white/70">setup & configuration</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                ${packageDetails.subscription}
+              </span>
+              <span className="text-white/70">/month</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <form action="/create-checkout-session" method="POST" className="w-full">
-      <input type="hidden" name="package" value={packageDetails.name} />
-      <button 
-        type="submit"
-        className="w-full py-4 px-8 rounded-xl font-medium text-center transition-all bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25"
-      >
-        Checkout
-      </button>
-    </form>
-  </section>
-);
+      <form onSubmit={handleCheckout} className="w-full">
+        <button 
+          type="submit"
+          className="w-full py-4 px-8 rounded-xl font-medium text-center transition-all bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25"
+        >
+          Checkout
+        </button>
+      </form>
+    </section>
+  );
+};
 
 const Message: React.FC<{ message: string }> = ({ message }) => (
   <section className="flex items-center justify-center min-h-[50vh]">
