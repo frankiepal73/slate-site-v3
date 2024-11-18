@@ -24,6 +24,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ de
 const TermsOfService = lazy(() => import('./pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy').then(m => ({ default: m.CookiePolicy })));
 const DataDeletion = lazy(() => import('./pages/DataDeletion').then(m => ({ default: m.DataDeletion })));
+const OrderPreview = lazy(() => import('./pages/OrderPreview').then(m => ({ default: m.OrderPreview })));
 
 // Memoize route components to prevent unnecessary re-renders
 const HomePage = memo(() => (
@@ -113,9 +114,10 @@ export default function App() {
       <Navigation />
       <main role="main" className="flex-grow">
         <Routes>
-          <Route path="/" element={
+          <Route path="/" element={<HomePage />} />
+          <Route path="/order-preview" element={
             <Suspense fallback={<LoadingScreen />}>
-              <HomePage />
+              <OrderPreview />
             </Suspense>
           } />
           <Route path="/get-started" element={
