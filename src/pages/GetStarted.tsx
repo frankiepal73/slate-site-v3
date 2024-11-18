@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Bot, Building2, Users2, MessageSquare, ArrowRight, ArrowLeft, Check, Loader2, Package } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { submitFormData } from '../services/formService';
 import { PackageCard } from '../components/forms/PackageCard';
 import { FormProgress } from '../components/forms/FormProgress';
 import { SuccessModal } from '../components/forms/SuccessModal';
 import { FormField } from '../components/forms/FormField';
 import type { FormData } from '../types/form';
-
-// Move packages and steps to separate config files
-import { packages, steps } from '../config/formConfig';
+import { steps } from '../config/formConfig';
 
 export function GetStarted() {
   const navigate = useNavigate();
@@ -130,6 +128,8 @@ export function GetStarted() {
     </div>
   );
 
+  const currentStepData = steps[currentStep];
+
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -158,21 +158,26 @@ export function GetStarted() {
         )}
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 mb-8">
+        <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
           <div>
-            <h2 className="text-2xl font-semibold text-white mb-8">{steps[currentStep].title}</h2>
+            <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
+            {currentStepData.subtitle && (
+              <p className="text-white/70 mb-8">
+                After payment, you'll receive an email with onboarding information. <span className="font-bold text-blue-400">Please complete the form or schedule your agent design session with the team within 24 hours</span> to ensure your agent is delivered on time.
+              </p>
+            )}
             <div className="space-y-6">
-              {steps[currentStep].fields?.map((field, fieldIndex) => (
+              {currentStepData.fields?.map((field, fieldIndex) => (
                 <div key={fieldIndex}>
                   {field.type === 'package-select' ? (
                     renderPackageSelection(field)
                   ) : (
                     <FormField
                       field={field}
-                      value={formData[`${steps[currentStep].title}-${field.label}`]}
-                      onChange={(value) => handleInputChange(`${steps[currentStep].title}-${field.label}`, value)}
+                      value={formData[`${currentStepData.title}-${field.label}`]}
+                      onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
                       error={field.type === 'email' ? emailError : undefined}
-                      stepTitle={steps[currentStep].title}
+                      stepTitle={currentStepData.title}
                     />
                   )}
                 </div>

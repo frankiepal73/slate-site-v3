@@ -90,19 +90,20 @@ export function Testimonials() {
                   <Quote className="w-12 h-12" />
                 </div>
 
-                {/* Highlight Badge */}
-                <div className="absolute -top-4 right-0">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full">
-                    <testimonial.icon className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-blue-400">{testimonial.highlight}</span>
+                {/* Header Section */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 mb-6">
+                  {/* Rating */}
+                  <div className="flex gap-1">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                </div>
-                
-                {/* Rating */}
-                <div className="flex gap-1 mb-6 mt-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
+
+                  {/* Highlight Badge */}
+                  <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full w-fit">
+                    <testimonial.icon className="w-4 h-4 text-blue-400" />
+                    <span className="text-sm font-medium text-blue-400 whitespace-nowrap">{testimonial.highlight}</span>
+                  </div>
                 </div>
                 
                 {/* Content */}

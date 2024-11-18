@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Sparkles, Bot, BarChart, Users, Calendar, MessageSquare, Database, Zap, ShoppingCart } from 'lucide-react';
+import { Check, Sparkles, Bot, BarChart, Users, Calendar, MessageSquare, Database, Zap, ShoppingCart, Code, Layout, Palette, History, UserPlus, Globe } from 'lucide-react';
 
 const tiers = [
   {
@@ -12,6 +12,9 @@ const tiers = [
     features: [
       { text: 'Lead Capture + Email Notification', icon: Database },
       { text: '24/7 Personalized Customer Support', icon: MessageSquare },
+      { text: 'Custom Branding: Agent Launcher & Avatar', icon: Bot },
+      { text: 'Done-For-You Website Code Installation', icon: Code },
+      { text: 'Support Across 29+ Languages', icon: Globe },
     ],
   },
   {
@@ -26,8 +29,11 @@ const tiers = [
       { text: 'Advanced Analytics', icon: BarChart },
       { text: 'Human Handoff', icon: Users },
       { text: 'Past Conversation Reference', icon: MessageSquare },
-      { text: "FAQ Management", icon: Database },
       { text: 'Appointment Scheduling', icon: Calendar },
+      { text: "Fully Customizable Agent Tabs (FAQ's, Calendar Embed, Events, Etc.)", icon: Layout },
+      { text: 'Custom Font & Background', icon: Palette },
+      { text: 'Conversation Assignment to Team Members', icon: UserPlus },
+      { text: 'Lead Database', icon: Database },
     ],
   },
   {
@@ -48,6 +54,32 @@ const tiers = [
 ];
 
 export function Pricing() {
+  const [hasDiscount, setHasDiscount] = useState(false);
+
+  useEffect(() => {
+    const checkDiscount = () => {
+      const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+      if (discountTimeLeft) {
+        const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+        setHasDiscount(timeRemaining > 0);
+      } else {
+        setHasDiscount(false);
+      }
+    };
+
+    // Check initially
+    checkDiscount();
+
+    // Set up interval to check regularly
+    const intervalId = setInterval(checkDiscount, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const calculateDiscountedPrice = (price: number): number => {
+    return hasDiscount ? Math.floor(price * 0.9) : price;
+  };
+
   return (
     <div id="pricing" className="relative bg-slate-900 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent)]"></div>
@@ -71,6 +103,15 @@ export function Pricing() {
               <span className="text-blue-400"> $3</span> for the Premium Package.
             </p>
           </div>
+          {hasDiscount && (
+            <div className="mt-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full text-blue-400 font-semibold">
+                <Sparkles className="w-4 h-4" />
+                10% Discount Applied!
+                <Sparkles className="w-4 h-4" />
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -101,7 +142,17 @@ export function Pricing() {
                   
                   <div className="mb-8">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl md:text-5xl font-bold text-white">${tier.setupFee}</span>
+                      <span className="text-4xl md:text-5xl font-bold text-white">
+                        {hasDiscount ? (
+                          <>
+                            <span className="line-through text-white/50 text-2xl">${tier.setupFee}</span>
+                            {' '}
+                            <span className="text-blue-400">${calculateDiscountedPrice(tier.setupFee)}</span>
+                          </>
+                        ) : (
+                          `$${tier.setupFee}`
+                        )}
+                      </span>
                       <span className="text-white/70">setup & configuration</span>
                     </div>
                     <div className="mt-2 flex items-baseline gap-2">
