@@ -113,7 +113,11 @@ export default function App() {
       <Navigation />
       <main role="main" className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={
+            <Suspense fallback={<LoadingScreen />}>
+              <HomePage />
+            </Suspense>
+          } />
           <Route path="/get-started" element={
             <Suspense fallback={<LoadingScreen />}>
               <GetStarted />

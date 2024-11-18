@@ -80,25 +80,11 @@ export function GetStarted() {
         const response = await submitFormData(formData);
         
         if (response.success) {
-          // Create checkout session
-          const selectedPackage = formData['Select Package-Package'];
-          try {
-            const checkoutResponse = await fetch('/api/create-checkout-session', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                package: selectedPackage
-              }),
-            });
-
-            const { url } = await checkoutResponse.json();
-            window.location.href = url;
-          } catch (error) {
-            console.error('Error creating checkout session:', error);
-            setError('Failed to create checkout session. Please try again.');
-          }
+          setShowSuccess(true);
+          setTimeout(() => {
+            setShowSuccess(false);
+            navigate('/');
+          }, 3000);
         }
       } catch (err) {
         setError('Failed to submit form. Please try again.');
@@ -175,7 +161,7 @@ export function GetStarted() {
         <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
-            {currentStep === 0 && (
+            {currentStepData.subtitle && (
               <p className="text-white/70 mb-8">
                 After payment, you'll receive an email with onboarding information. <span className="font-bold text-blue-400">Please complete the form or schedule your agent design session with the team within 24 hours</span> to ensure your agent is delivered on time.
               </p>
@@ -190,7 +176,7 @@ export function GetStarted() {
                       field={field}
                       value={formData[`${currentStepData.title}-${field.label}`]}
                       onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
-                      error={field.type === 'email' ? emailError || undefined : undefined}
+                      error={field.type === 'email' ? emailError : undefined}
                       stepTitle={currentStepData.title}
                     />
                   )}
