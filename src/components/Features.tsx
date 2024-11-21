@@ -59,23 +59,20 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`
-                group relative bg-white/5 backdrop-blur-xl p-4 md:p-8 rounded-2xl 
-                hover:bg-white/10 transition-all duration-300 hover:scale-105
-                ${index === 0 ? 'md:col-span-2 lg:col-span-1' : ''}
-              `}
+              className="group relative bg-white/5 backdrop-blur-xl p-4 md:p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:scale-105"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
               
               {/* Mobile Layout */}
-              <div className="md:hidden flex flex-col items-center text-center">
+              <div className="md:hidden flex flex-col">
                 <feature.icon className="w-8 h-8 text-blue-400 mb-3" />
-                <h3 className="text-base font-semibold text-white mb-2">{feature.title}</h3>
-                <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-blue-400 mt-2">
+                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-white/70 mb-4">{feature.description}</p>
+                <div className="flex items-center gap-1.5 text-sm font-medium text-blue-400 mt-auto">
                   <span>{feature.highlight}</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -99,10 +96,11 @@ export function Features() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             
             {/* Mobile Layout */}
-            <div className="md:hidden flex flex-col items-center text-center">
+            <div className="md:hidden flex flex-col">
               <BarChart3 className="w-8 h-8 text-blue-400 mb-3" />
-              <h3 className="text-base font-semibold text-white mb-2">Rich Analytics</h3>
-              <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-blue-400 mt-2">
+              <h3 className="text-lg font-semibold text-white mb-2">Rich Analytics</h3>
+              <p className="text-white/70 mb-4">Deep insights into every customer interaction</p>
+              <div className="flex items-center gap-1.5 text-sm font-medium text-blue-400 mt-auto">
                 <span>Real-time insights</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </div>

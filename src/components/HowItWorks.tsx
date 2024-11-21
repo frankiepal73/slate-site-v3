@@ -135,10 +135,10 @@ export function HowItWorks() {
                               <div className="relative">
                                 <div 
                                   className={`
-                                    relative bg-gradient-to-br from-green-400/40 to-green-500/40 backdrop-blur-xl p-5 rounded-2xl 
-                                    hover:from-green-400/50 hover:to-green-500/50 transition-all duration-300
-                                    overflow-hidden group shadow-lg shadow-green-400/30 hover:shadow-green-400/50
-                                    border border-green-400/30
+                                    relative bg-gradient-to-br from-green-600/40 to-green-700/40 backdrop-blur-xl p-5 rounded-2xl 
+                                    hover:from-green-600/50 hover:to-green-700/50 transition-all duration-300
+                                    overflow-hidden group shadow-lg shadow-green-600/30 hover:shadow-green-600/50
+                                    border border-green-600/30
                                   `}
                                 >
                                   {/* Check Circle Icon */}
@@ -150,7 +150,7 @@ export function HowItWorks() {
                                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-shimmer"></div>
                                   
                                   {/* Glow effect */}
-                                  <div className="absolute -inset-px bg-green-400/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
+                                  <div className="absolute -inset-px bg-green-600/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
                                   
                                   <div className="relative flex flex-col items-start gap-2 pt-8">
                                     <p className="text-white/90 text-base md:text-lg font-bold relative z-10">{path.title}</p>
