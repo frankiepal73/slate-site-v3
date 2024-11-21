@@ -9,10 +9,10 @@ interface SingleCheckboxFieldProps {
 
 export function SingleCheckboxField({ text, checked, onChange, required }: SingleCheckboxFieldProps) {
   return (
-    <label className="flex items-start gap-2 cursor-pointer group">
+    <label className="flex items-center gap-2 cursor-pointer group">
       <input
         type="checkbox"
-        className="w-4 h-4 mt-1 rounded text-blue-500 focus:ring-blue-500"
+        className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />

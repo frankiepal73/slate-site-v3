@@ -3,8 +3,8 @@ import { Bot, Building2, Users2, MessageSquare, Package } from 'lucide-react';
 export const packages = [
   {
     name: 'Standard Assistant',
-    price: '299',
-    subscription: '79',
+    price: '399',
+    subscription: '99',
     features: [
       'Lead Capture + Email Notification',
       '24/7 Personalized Customer Support',
@@ -17,8 +17,8 @@ export const packages = [
   },
   {
     name: 'Advanced Assistant',
-    price: '349',
-    subscription: '149',
+    price: '499',
+    subscription: '199',
     features: [
       'Everything in Standard',
       'Branded Login Portal',
@@ -36,13 +36,13 @@ export const packages = [
   },
   {
     name: 'Premium Package',
-    price: '499',
-    subscription: '249',
+    price: '599',
+    subscription: '299',
     features: [
       'Everything in Advanced',
       'Lead Capture + CRM Integration',
       'Smart Product Recommendations',
-      '24/7 Priority Support',
+      'Priority Support',
       'Monthly Optimizations',
       'Performance Reviews',
       '50 Free Monthly Conversations',
@@ -69,9 +69,7 @@ export const steps = [
     icon: Building2,
     fields: [
       { label: "Website", type: "url", placeholder: "https://your-website.com", required: true },
-      { label: "Number of Employees", type: "select", options: ["1-10", "11-50", "51-200", "201-500", "500+"], required: true },
-      { label: "Customer Service Team Size", type: "select", options: ["1-5", "6-20", "21-50", "50+"], required: true },
-      { label: "Average Monthly Conversations", type: "select", options: ["0-100", "101-500", "501-2000", "2000+"], required: true }
+      { label: "Number of Employees", type: "select", options: ["1-10", "11-50", "51-200", "201-500", "500+"], required: true }
     ]
   },
   {

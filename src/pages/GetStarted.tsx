@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bot, Building2, Users2, MessageSquare, ArrowRight, ArrowLeft, Check, Loader2, Package } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { submitFormData } from '../services/formService';
 import { PackageCard } from '../components/forms/PackageCard';
 import { FormProgress } from '../components/forms/FormProgress';
@@ -10,7 +10,6 @@ import type { FormData } from '../types/form';
 import { steps } from '../config/formConfig';
 
 export function GetStarted() {
-  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +24,10 @@ export function GetStarted() {
     }
     return false;
   });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStep]); // Scroll to top when step changes
 
   const validateEmail = (email: string): boolean => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -83,7 +86,6 @@ export function GetStarted() {
           setShowSuccess(true);
           setTimeout(() => {
             setShowSuccess(false);
-            navigate('/');
           }, 3000);
         }
       } catch (err) {
@@ -114,36 +116,7 @@ export function GetStarted() {
     }
   };
 
-  const renderPackageSelection = (field: any) => (
-    <div className="grid grid-cols-1 gap-4">
-      {field.packages.map((pkg: any) => (
-        <PackageCard
-          key={pkg.name}
-          pkg={pkg}
-          isSelected={formData[`${steps[currentStep].title}-${field.label}`] === pkg.name}
-          hasDiscount={hasDiscount}
-          onSelect={() => handleInputChange(`${steps[currentStep].title}-${field.label}`, pkg.name)}
-        />
-      ))}
-    </div>
-  );
-
   const currentStepData = steps[currentStep];
-
-  const getBuyButtonId = (selectedPackage: string | undefined | boolean) => {
-    if (typeof selectedPackage !== 'string') return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of';
-    
-    switch (selectedPackage) {
-      case 'Standard Assistant':
-        return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of';
-      case 'Advanced Assistant':
-        return 'buy_btn_1QMLlGIKUom0H2xV8H8ecT5L';
-      case 'Premium Package':
-        return 'buy_btn_1QMLTCIKUom0H2xVh0Xx9yZ5';
-      default:
-        return 'buy_btn_1QMLk3IKUom0H2xV6Q5Y73of'; // Default to Standard
-    }
-  };
 
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
@@ -158,7 +131,7 @@ export function GetStarted() {
           </h1>
           {hasDiscount && (
             <div className="mt-4 inline-block px-4 py-2 bg-blue-500/20 rounded-full">
-              <span className="text-blue-400 font-medium">10% discount applied!</span>
+              <span className="text-blue-400 font-medium">20% discount applied!</span>
             </div>
           )}
         </div>
@@ -173,23 +146,33 @@ export function GetStarted() {
         )}
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl p-4 rounded-2xl mb-8">
+        <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
-            <p className="text-white/70 mb-8">
-              {/* Removed the onboarding text */}
-            </p>
+            {currentStepData.subtitle && (
+              <p className="text-white/70 mb-8">{currentStepData.subtitle}</p>
+            )}
             <div className="space-y-6">
               {currentStepData.fields?.map((field, fieldIndex) => (
                 <div key={fieldIndex}>
                   {field.type === 'package-select' ? (
-                    renderPackageSelection(field)
+                    <div className="grid grid-cols-1 gap-4">
+                      {field.packages.map((pkg: any) => (
+                        <PackageCard
+                          key={pkg.name}
+                          pkg={pkg}
+                          isSelected={formData[`${currentStepData.title}-${field.label}`] === pkg.name}
+                          hasDiscount={hasDiscount}
+                          onSelect={() => handleInputChange(`${currentStepData.title}-${field.label}`, pkg.name)}
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <FormField
                       field={field}
                       value={formData[`${currentStepData.title}-${field.label}`]}
                       onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
-                      error={field.type === 'email' ? emailError || undefined : undefined}
+                      error={field.type === 'email' ? emailError : undefined}
                       stepTitle={currentStepData.title}
                     />
                   )}
@@ -200,7 +183,7 @@ export function GetStarted() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between">
           <button
             onClick={handlePrev}
             className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
@@ -214,33 +197,23 @@ export function GetStarted() {
             Previous
           </button>
           
-          {currentStep !== steps.length - 1 ? (
-            <button
-              onClick={handleNext}
-              disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                <>
-                  Next
-                  <ArrowRight className="w-5 h-5" />
-                </>
-              )}
-            </button>
-          ) : (
-            <div>
-              <stripe-buy-button
-                buy-button-id={getBuyButtonId(formData['Select Package-Package'])}
-                publishable-key="pk_live_51Q6wvdIKUom0H2xVCF8pKbUqC6ytSEbhKRdNCcSX6WOSLbojVlWUv3Cm22H9fYJOzhS82WPTKIKbt3uZArqzldZq006lE87hpc"
-              >
-              </stripe-buy-button>
-            </div>
-          )}
+          <button
+            onClick={handleNext}
+            disabled={isSubmitting}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              <>
+                {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
         </div>
       </div>
 

@@ -11,7 +11,7 @@ export async function submitFormData(formData: FormData): Promise<{ success: boo
     const formattedData = {
       timestamp: new Date().toISOString(),
       discountApplied: hasValidDiscount,
-      discountAmount: hasValidDiscount ? 10 : 0,
+      discountAmount: hasValidDiscount ? 20 : 0, // Updated from 10 to 20
       formData: Object.entries(formData).reduce((acc, [key, value]) => {
         // Skip the hasDiscount field from the main form data
         if (key === 'hasDiscount') return acc;

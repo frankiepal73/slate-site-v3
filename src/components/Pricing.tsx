@@ -6,22 +6,22 @@ const tiers = [
   {
     name: 'Standard Assistant',
     description: 'Perfect to cover your basics',
-    setupFee: 299,
-    monthlyPrice: 79,
+    setupFee: 399,
+    monthlyPrice: 99,
     featured: false,
     features: [
       { text: 'Lead Capture + Email Notification', icon: Database },
       { text: '24/7 Personalized Customer Support', icon: MessageSquare },
       { text: 'Custom Branding: Agent Launcher & Avatar', icon: Bot },
       { text: 'Done-For-You Website Code Installation', icon: Code },
-      { text: 'Support Across 29+ Languages', icon: Globe },
-    ],
+      { text: 'Support Across 29+ Languages', icon: Globe }
+    ]
   },
   {
     name: 'Advanced Assistant',
     description: 'Enhanced features for growing businesses',
-    setupFee: 349,
-    monthlyPrice: 149,
+    setupFee: 499,
+    monthlyPrice: 199,
     featured: false,
     features: [
       { text: 'Everything in Standard', icon: Check },
@@ -33,24 +33,24 @@ const tiers = [
       { text: "Fully Customizable Agent Tabs (FAQ's, Calendar Embed, Events, Etc.)", icon: Layout },
       { text: 'Custom Font & Background', icon: Palette },
       { text: 'Conversation Assignment to Team Members', icon: UserPlus },
-      { text: 'Lead Database', icon: Database },
-    ],
+      { text: 'Lead Database', icon: Database }
+    ]
   },
   {
     name: 'Premium Package',
     description: 'Complete solution with ongoing support',
-    setupFee: 499,
-    monthlyPrice: 249,
+    setupFee: 599,
+    monthlyPrice: 299,
     featured: true,
     features: [
       { text: 'Everything in Advanced', icon: Check },
       { text: 'Lead Capture + CRM Integration', icon: Database },
       { text: 'Smart Product Recommendations', icon: ShoppingCart },
-      { text: '24/7 Priority Support', icon: Zap },
+      { text: 'Priority Support', icon: Zap },
       { text: 'Monthly Optimizations', icon: BarChart },
-      { text: 'Performance Reviews', icon: Users },
-    ],
-  },
+      { text: 'Performance Reviews', icon: Users }
+    ]
+  }
 ];
 
 export function Pricing() {
@@ -77,7 +77,7 @@ export function Pricing() {
   }, []);
 
   const calculateDiscountedPrice = (price: number): number => {
-    return hasDiscount ? Math.floor(price * 0.9) : price;
+    return hasDiscount ? Math.floor(price * 0.8) : price; // Updated from 0.9 to 0.8 for 20% discount
   };
 
   return (
@@ -107,7 +107,7 @@ export function Pricing() {
             <div className="mt-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full text-blue-400 font-semibold">
                 <Sparkles className="w-4 h-4" />
-                10% Discount Applied!
+                20% Discount Applied!
                 <Sparkles className="w-4 h-4" />
               </span>
             </div>
@@ -178,7 +178,7 @@ export function Pricing() {
                         : 'bg-white/10 text-white hover:bg-white/20'
                     }`}
                   >
-                    Create Your Chatbot
+                    Convert More With AI
                   </Link>
                 </div>
               </div>
@@ -190,21 +190,12 @@ export function Pricing() {
         <div className="text-center mt-32">
           <h2 className="text-3xl font-bold text-white mb-8">Ready for Takeoff? 🚀</h2>
           
-          <div className="flex flex-col gap-4">
-            <Link
-              to="/get-started"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
-            >
-              I'm ready to start saving time, booking more appointments, selling more products, and making my business more awesome
-            </Link>
-            
-            <button 
-              className="text-white/50 hover:text-white/70 transition-colors text-sm"
-              onClick={() => window.history.back()}
-            >
-              No, I love doing everything manually and converting less website visitors into money
-            </button>
-          </div>
+          <Link
+            to="/get-started"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
+          >
+            I'm ready to start saving time, booking more appointments, selling more products, and making my business more awesome
+          </Link>
         </div>
       </div>
     </div>

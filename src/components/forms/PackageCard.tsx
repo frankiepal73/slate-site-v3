@@ -15,8 +15,8 @@ interface PackageCardProps {
 
 export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageCardProps) {
   const calculateDiscountedPrice = (price: string): number => {
-    const numericPrice = parseInt(price, 10);
-    return hasDiscount ? Math.floor(numericPrice * 0.9) : numericPrice;
+    const numericPrice = parseInt(price.replace(/,/g, ''), 10);
+    return hasDiscount ? Math.floor(numericPrice * 0.8) : numericPrice; // 20% discount
   };
 
   const isPremium = pkg.name === 'Premium Package';

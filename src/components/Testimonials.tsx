@@ -29,7 +29,7 @@ const testimonials = [
   },
   {
     name: "Sarah Thompson",
-    role: "CEO at EcomGrowth",
+    role: "E-commerce Manager",
     content: "Slate transformed our customer service. Our response times dropped by 90%, and it now handles 70%+ of customer support",
     rating: 5,
     highlight: "90% Faster Response",
@@ -54,7 +54,7 @@ const testimonials = [
   {
     name: "Matthew Mosholder",
     role: "AMM Global (E-Commerce Store Conglomerate)",
-    content: "Since deploying Slate agents across all of our e-commerce stores, we've seen a significant improvement in our overall performance. The chatbots have been incredibly effective at handling a wide range of customer service inquiries, freeing up our team to focus on more complex tasks and strategic initiatives. We've been able to save hours each week that were previously spent on repetitive questions and issues.\n\nBy quickly matching customers with the most relevant products based on their needs and preferences, we've seen a notable increase in sales and customer satisfaction. The personalized approach has made a real difference in how our customers perceive and engage with our brands.\n\nAnother key benefit has been the improvement in lead capture from our website traffic. The Slate agents have been instrumental in engaging visitors, understanding their requirements, and guiding them through the sales funnel. As a result, we've seen a higher conversion rate and a growing database of qualified leads.\n\nOverall, the integration of Slate agents has been a transformative experience for AMM Global. The combination of enhanced customer service, personalized product recommendations, and efficient lead capture has had a positive impact on our bottom line and set the stage for future growth.",
+    content: "Since deploying Slate agents across all of our e-commerce stores, we've seen a significant improvement in our overall performance. The chatbots have been incredibly effective at handling a wide range of customer service inquiries, freeing up our team to focus on more complex tasks and strategic initiatives. We've been able to save hours each week that were previously spent on repetitive questions and issues.\n\nBy quickly matching customers with the most relevant products based on their needs and preferences, we've seen a notable increase in sales and customer satisfaction. The personalized approach has made a real difference in how our customers perceive and engage with our brands.\n\nOverall, the integration of Slate agents has been a transformative experience for AMM Global. The combination of enhanced customer service, personalized product recommendations, and efficient lead capture has had a positive impact on our bottom line and set the stage for future growth.",
     rating: 5,
     highlight: "Multi-Store Success",
     icon: Users
@@ -63,16 +63,19 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <div className="relative bg-slate-900 py-32">
+    <div className="relative bg-slate-900 py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(147,51,234,0.1),transparent)]"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
+            <Star className="w-8 h-8 text-blue-400" />
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Business Leaders</span>
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            See why thousands of businesses trust Slate to drive growth and deliver exceptional customer experiences.
+            See why businesses trust Slate to drive growth and deliver exceptional customer experiences.
           </p>
         </div>
 
@@ -127,7 +130,7 @@ export function Testimonials() {
             to="/get-started"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
           >
-            Create Your Chatbot
+            Convert More With AI
           </Link>
         </div>
       </div>

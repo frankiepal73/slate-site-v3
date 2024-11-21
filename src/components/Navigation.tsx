@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Bot, Menu, X } from 'lucide-react';
+import { Bot, Menu, X, Sparkles } from 'lucide-react';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasDiscount] = useState(() => {
+    const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
+    if (discountTimeLeft) {
+      const timeRemaining = parseInt(discountTimeLeft, 10) - Date.now();
+      return timeRemaining > 0;
+    }
+    return false;
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -74,21 +82,35 @@ export function Navigation() {
             </button>
             <Link 
               to="/get-started"
-              className="px-6 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+              className="group relative px-6 py-2.5 bg-blue-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
             >
-              Create Your Chatbot +
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+              <span className="relative flex items-center gap-2">
+                Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
+              </span>
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center gap-3">
+            <Link 
+              to="/get-started"
+              className="group relative px-4 py-2 bg-blue-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+              <span className="relative flex items-center gap-1.5">
+                Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+            <button 
+              className="text-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -138,14 +160,6 @@ export function Navigation() {
             >
               Pricing
             </button>
-            <Link 
-              to="/get-started"
-              className="block px-6 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all text-center"
-              onClick={() => setIsMobileMenuOpen(false)}
-              role="menuitem"
-            >
-              Create Your Chatbot +
-            </Link>
           </div>
         </div>
       )}

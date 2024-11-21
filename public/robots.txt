@@ -19,3 +19,5 @@ Allow: /get-started
 Allow: /watch-demo
 Allow: /pricing
 Allow: /features
+Allow: /why-us
+Allow: /how-this-works

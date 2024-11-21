@@ -1,27 +1,28 @@
 import React from 'react';
-import { Bot, Package, CreditCard, Code, Rocket, Flag, SmilePlus, CheckCircle2, Sparkles, PartyPopper } from 'lucide-react';
+import { Bot, Package, Code, PartyPopper, Flag, SmilePlus, CheckCircle2, Sparkles, Book } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const steps = [
   {
     number: "01",
-    icon: Bot,
-    title: "Book a Discovery Call",
-    description: "Schedule a quick chat to discuss your business needs and how we can help automate your customer service.",
-    color: "from-blue-500 to-purple-500"
+    icon: Book,
+    title: "Read About How Cool Slate Is",
+    description: "Learn about our powerful AI assistant and how it sells products, captures leads, schedules appointments, and handles customer service for you 24/7.",
+    color: "from-blue-500 to-purple-500",
+    isCompleted: true
   },
   {
     number: "02",
     icon: Package,
     title: "Choose Your Package",
-    description: "Select the perfect plan for your business size and needs. We'll help you make the right choice.",
+    description: "Select the perfect agent for your business size and needs.",
     color: "from-purple-500 to-pink-500"
   },
   {
     number: "03",
     icon: Code,
-    title: "Check out & onboard",
-    description: <span>Complete your purchase and share your business details <span className="text-blue-400">(within 24H)</span></span>,
+    title: "Onboard",
+    description: "Collaborate with our design team to bring your ideal AI agent to life. We'll customize your chatbot's personality and capabilities to perfectly represent your unique brand. Then, we'll dive into building your tailored solution.",
     color: "from-pink-500 to-red-500"
   },
   {
@@ -78,10 +79,16 @@ export function HowThisWorks() {
                 {/* Step Number Bubble */}
                 <div className={`
                   absolute left-0 flex items-center justify-center w-14 h-14 rounded-full
-                  bg-gradient-to-r ${step.color}
+                  ${step.isCompleted 
+                    ? 'bg-green-500/20 border border-green-500' 
+                    : `bg-gradient-to-r ${step.color}`}
                   ${index === 3 ? 'animate-pulse shadow-lg shadow-blue-500/50' : 'animate-pulse'}
                 `}>
-                  <step.icon className="w-6 h-6 text-white" />
+                  {step.isCompleted ? (
+                    <CheckCircle2 className="w-6 h-6 text-green-400" />
+                  ) : (
+                    <step.icon className="w-6 h-6 text-white" />
+                  )}
                 </div>
 
                 {/* Content Card */}

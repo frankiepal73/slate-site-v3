@@ -9,11 +9,12 @@
   <url>
     <loc>https://chatwithslate.com/</loc>
     <lastmod>2024-03-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://chatwithslate.com/og-image.jpg</image:loc>
       <image:title>Slate AI - Transform Website Visitors into Customers</image:title>
+      <image:caption>AI-powered customer service automation</image:caption>
     </image:image>
   </url>
   <url>
@@ -23,7 +24,13 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://chatwithslate.com/watch-demo</loc>
+    <loc>https://chatwithslate.com/why-us</loc>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chatwithslate.com/how-this-works</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -32,12 +39,12 @@
     <loc>https://chatwithslate.com/pricing</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://chatwithslate.com/features</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>

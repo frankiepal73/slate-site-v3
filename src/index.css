@@ -98,14 +98,6 @@
   .momentum-scroll {
     -webkit-overflow-scrolling: touch;
   }
-
-  .stripe-button-container {
-    min-height: 40px;
-    min-width: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 @keyframes gradient {
