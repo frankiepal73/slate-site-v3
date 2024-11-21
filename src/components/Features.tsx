@@ -109,12 +109,10 @@ export function Features() {
             </div>
             
             {/* Desktop Layout */}
-            <div className="hidden md:block text-center">
-              <div className="flex justify-center">
-                <BarChart3 className="w-10 h-10 text-blue-400 mb-6 relative" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-4 relative">Rich Analytics</h3>
-              <p className="text-white/70 relative mb-6">Deep insights into every customer interaction</p>
+            <div className="hidden md:block">
+              <BarChart3 className="w-10 h-10 text-blue-400 mb-6 relative mx-auto" />
+              <h3 className="text-xl font-semibold text-white mb-4 relative text-center">Rich Analytics</h3>
+              <p className="text-white/70 relative mb-6 text-center">Deep insights into every customer interaction</p>
               <div className="flex items-center justify-center gap-2 text-sm font-medium text-blue-400 relative">
                 <span>Real-time insights</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

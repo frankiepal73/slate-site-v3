@@ -1,28 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bot, SmilePlus, MessageSquare } from 'lucide-react';
 
 export function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    timeoutRef.current = setTimeout(() => {
-      setIsVisible(false);
-    }, 2500);
+    // Start exit animation after 2 seconds
+    const exitTimer = setTimeout(() => {
+      setIsExiting(true);
+    }, 2000);
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      clearTimeout(exitTimer);
     };
   }, []);
 
-  if (!isVisible) {
-    return null;
-  }
-
   return (
-    <div className="fixed inset-0 bg-slate-900 flex items-center justify-center z-50">
+    <div 
+      className={`fixed inset-0 bg-slate-900 flex items-center justify-center z-50 transition-opacity duration-500 ${
+        isExiting ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
       <div className="relative">
         {/* Bot Icon */}
         <div className="absolute -top-16 left-1/2 -translate-x-1/2 animate-chat-bubble">
