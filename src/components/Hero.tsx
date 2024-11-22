@@ -79,7 +79,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            <span className="text-white/70 text-sm">Rated 4.9 by 40+ happy clients</span>
+            <span className="text-white/70 text-sm">Rated 4.9 by happy clients</span>
           </div>
         </div>
 
