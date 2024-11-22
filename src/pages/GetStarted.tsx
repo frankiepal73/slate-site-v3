@@ -87,8 +87,8 @@ export function GetStarted() {
           setShowSuccess(true);
           setTimeout(() => {
             setShowSuccess(false);
-            navigate('/'); // Navigate to home after success
-          }, 3000);
+            window.location.href = 'https://cal.com/frankpalmeri/slate-ai-initial-discovery-call';
+          }, 2000);
         }
       } catch (err) {
         setError('Failed to submit form. Please try again.');
@@ -122,7 +122,7 @@ export function GetStarted() {
 
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
-      <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
@@ -158,7 +158,7 @@ export function GetStarted() {
               {currentStepData.fields?.map((field, fieldIndex) => (
                 <div key={fieldIndex}>
                   {field.type === 'package-select' ? (
-                    <div className="grid grid-cols-1 gap-4">
+                    <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
                       {field.packages.map((pkg: any) => (
                         <PackageCard
                           key={pkg.name}
