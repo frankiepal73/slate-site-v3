@@ -6,11 +6,13 @@ import { Features } from './components/Features';
 import { HowItWorks } from './components/HowItWorks';
 import { Testimonials } from './components/Testimonials';
 import { Pricing } from './components/Pricing';
+import { FAQSection } from './components/FAQSection';
 import { Footer } from './components/Footer';
 import { GetStarted } from './pages/GetStarted';
 import { WhyUs } from './pages/WhyUs';
 import { HowThisWorks } from './pages/HowThisWorks';
 import { WatchDemo } from './pages/WatchDemo';
+import { FAQs } from './pages/FAQs';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 import { CookiePolicy } from './pages/CookiePolicy';
@@ -24,6 +26,7 @@ const HomePage = React.memo(() => (
     <HowItWorks />
     <Testimonials />
     <Pricing />
+    <FAQSection />
   </>
 ));
 
@@ -38,6 +41,7 @@ export default function App() {
           <Route path="/why-us" element={<WhyUs />} />
           <Route path="/how-this-works" element={<HowThisWorks />} />
           <Route path="/watch-demo" element={<WatchDemo />} />
+          <Route path="/faqs" element={<FAQs />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/cookies" element={<CookiePolicy />} />

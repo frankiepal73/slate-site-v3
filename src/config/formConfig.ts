@@ -3,7 +3,7 @@ import { Bot, Building2, Users2, MessageSquare, Package } from 'lucide-react';
 export const packages = [
   {
     name: 'Standard Assistant',
-    price: '399',
+    price: '299',
     subscription: '99',
     features: [
       'Lead Capture + Email Notification',
@@ -17,7 +17,7 @@ export const packages = [
   },
   {
     name: 'Advanced Assistant',
-    price: '499',
+    price: '349',
     subscription: '199',
     features: [
       'Everything in Standard',
@@ -36,7 +36,7 @@ export const packages = [
   },
   {
     name: 'Premium Package',
-    price: '599',
+    price: '399',
     subscription: '299',
     features: [
       'Everything in Advanced',
@@ -68,8 +68,7 @@ export const steps = [
     title: "Business Details",
     icon: Building2,
     fields: [
-      { label: "Website", type: "url", placeholder: "https://your-website.com", required: true },
-      { label: "Number of Employees", type: "select", options: ["1-10", "11-50", "51-200", "201-500", "500+"], required: true }
+      { label: "Website", type: "url", placeholder: "your-website.com", required: true }
     ]
   },
   {

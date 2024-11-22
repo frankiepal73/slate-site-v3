@@ -49,7 +49,9 @@ export function Footer() {
       { name: 'Features', href: 'features', isSection: true },
       { name: 'Pricing', href: 'pricing', isSection: true },
       { name: 'Why Us', href: '/why-us', isSection: false },
+      { name: 'How It Works', href: '/how-this-works', isSection: false },
       { name: 'Watch Demo', href: '/watch-demo', isSection: false },
+      { name: 'FAQs', href: '/faqs', isSection: false },
       { name: 'Get Started', href: '/get-started', isSection: false }
     ],
     legal: [

@@ -16,14 +16,14 @@ interface PackageCardProps {
 export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageCardProps) {
   const calculateDiscountedPrice = (price: string): number => {
     const numericPrice = parseInt(price.replace(/,/g, ''), 10);
-    return hasDiscount ? Math.floor(numericPrice * 0.8) : numericPrice; // 20% discount
+    return hasDiscount ? Math.floor(numericPrice * 0.8) : numericPrice;
   };
 
   const isPremium = pkg.name === 'Premium Package';
 
   return (
     <div
-      className={`relative p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+      className={`relative p-4 sm:p-6 rounded-xl cursor-pointer transition-all duration-300 ${
         isPremium 
           ? 'border-2 border-blue-500/30 scale-105 bg-gradient-to-r from-blue-500/10 to-purple-500/10'
           : ''

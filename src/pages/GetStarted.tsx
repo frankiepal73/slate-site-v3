@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bot, Building2, Users2, MessageSquare, ArrowRight, ArrowLeft, Check, Loader2, Package } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { submitFormData } from '../services/formService';
 import { PackageCard } from '../components/forms/PackageCard';
 import { FormProgress } from '../components/forms/FormProgress';
@@ -10,6 +10,7 @@ import type { FormData } from '../types/form';
 import { steps } from '../config/formConfig';
 
 export function GetStarted() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +28,7 @@ export function GetStarted() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentStep]); // Scroll to top when step changes
+  }, [currentStep]);
 
   const validateEmail = (email: string): boolean => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -86,6 +87,7 @@ export function GetStarted() {
           setShowSuccess(true);
           setTimeout(() => {
             setShowSuccess(false);
+            navigate('/'); // Navigate to home after success
           }, 3000);
         }
       } catch (err) {
@@ -120,7 +122,7 @@ export function GetStarted() {
 
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
@@ -146,7 +148,7 @@ export function GetStarted() {
         )}
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl mb-8">
+        <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
             {currentStepData.subtitle && (

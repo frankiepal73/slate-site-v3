@@ -21,6 +21,12 @@
         right: -60px !important;
         bottom: -120px !important;
       }
+
+      /* Hide chatbot on specific pages */
+      body[data-hide-chat="true"] #VG_OVERLAY_CONTAINER,
+      body[data-hide-chat="true"] #vg-widget-container {
+        display: none !important;
+      }
     </style>
   </head>
   <body>
@@ -42,26 +48,62 @@
 
     <script>
         (function() {
-            // Delay chatbot initialization
-            const initChatbot = () => {
-                window.VG_CONFIG = {
-                    ID: "qds0iux6fkzqv30e",
-                    region: 'na',
-                    render: 'bottom-right',
-                    stylesheets: [
-                        "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
-                    ],
-                }
-
-                var VG_SCRIPT = document.createElement("script");
-                VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
-                VG_SCRIPT.defer = true;
-                document.body.appendChild(VG_SCRIPT);
+            // Check if we should hide the chatbot based on current path
+            const shouldHideChat = () => {
+                const path = window.location.pathname;
+                return path.includes('/get-started');
             };
 
-            // Wait for page load and add additional delay to account for loading screen
+            // Update body attribute based on path
+            const updateChatVisibility = () => {
+                document.body.setAttribute('data-hide-chat', shouldHideChat().toString());
+            };
+
+            // Initial visibility check
+            updateChatVisibility();
+
+            // Listen for route changes
+            const pushState = history.pushState;
+            history.pushState = function() {
+                pushState.apply(history, arguments);
+                updateChatVisibility();
+            };
+
+            window.addEventListener('popstate', updateChatVisibility);
+
+            // Watch for URL changes using MutationObserver
+            const observer = new MutationObserver(() => {
+                updateChatVisibility();
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            // Delay chatbot initialization
+            const initChatbot = () => {
+                // Only initialize if not on get-started page
+                if (!shouldHideChat()) {
+                    window.VG_CONFIG = {
+                        ID: "qds0iux6fkzqv30e",
+                        region: 'na',
+                        render: 'bottom-right',
+                        stylesheets: [
+                            "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                        ],
+                    }
+
+                    var VG_SCRIPT = document.createElement("script");
+                    VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+                    VG_SCRIPT.defer = true;
+                    document.body.appendChild(VG_SCRIPT);
+                }
+            };
+
+            // Wait for page load and add additional delay
             window.addEventListener('load', () => {
-                setTimeout(initChatbot, 3000); // 3 second delay after page load
+                setTimeout(initChatbot, 3000);
             });
         })()
     </script>

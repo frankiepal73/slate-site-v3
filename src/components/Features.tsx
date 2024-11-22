@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShoppingCart, Users, Calendar, MessageSquareMore, Globe, BarChart3, Zap, ArrowRight, Package } from 'lucide-react';
+import { ShoppingCart, Users, Calendar, MessageSquareMore, Globe, BarChart3, Zap, Link, Sparkles } from 'lucide-react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const features = [
   {
@@ -21,12 +22,6 @@ const features = [
     highlight: "2.4x higher conversion rate"
   },
   {
-    icon: Package,
-    title: "Smart Order Tracking",
-    description: "Automated order status updates and proactive shipping notifications",
-    highlight: "90% fewer tracking inquiries"
-  },
-  {
     icon: Calendar,
     title: "Seamless Scheduling",
     description: "Automated booking that integrates with your calendar",
@@ -37,6 +32,12 @@ const features = [
     title: "29 Languages",
     description: "Break language barriers and serve customers globally",
     highlight: "98% translation accuracy"
+  },
+  {
+    icon: BarChart3,
+    title: "Rich Analytics",
+    description: "Deep insights into every customer interaction",
+    highlight: "Real-time insights"
   }
 ];
 
@@ -59,64 +60,36 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative bg-white/5 backdrop-blur-xl p-4 md:p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:scale-105"
+              className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:scale-105"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
               
-              {/* Mobile Layout */}
-              <div className="md:hidden flex flex-col">
-                <feature.icon className="w-8 h-8 text-blue-400 mb-3" />
-                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-white/70 mb-4">{feature.description}</p>
-                <div className="flex items-center gap-1.5 text-sm font-medium text-blue-400 mt-auto">
-                  <span>{feature.highlight}</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-              
-              {/* Desktop Layout */}
-              <div className="hidden md:block">
-                <feature.icon className="w-10 h-10 text-blue-400 mb-6 relative" />
-                <h3 className="text-xl font-semibold text-white mb-4 relative">{feature.title}</h3>
-                <p className="text-white/70 relative mb-6">{feature.description}</p>
-                <div className="flex items-center gap-2 text-sm font-medium text-blue-400 relative">
-                  <span>{feature.highlight}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+              <feature.icon className="w-10 h-10 text-blue-400 mb-6 relative" />
+              <h3 className="text-xl font-semibold text-white mb-4 relative">{feature.title}</h3>
+              <p className="text-white/70 relative mb-6">{feature.description}</p>
+              <div className="flex items-center gap-2 text-sm font-medium text-blue-400 relative">
+                <span>{feature.highlight}</span>
+                <Link className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}
+        </div>
 
-          {/* Rich Analytics Feature */}
-          <div className="group relative bg-white/5 backdrop-blur-xl p-4 md:p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-            
-            {/* Mobile Layout */}
-            <div className="md:hidden flex flex-col">
-              <BarChart3 className="w-8 h-8 text-blue-400 mb-3" />
-              <h3 className="text-lg font-semibold text-white mb-2">Rich Analytics</h3>
-              <p className="text-white/70 mb-4">Deep insights into every customer interaction</p>
-              <div className="flex items-center gap-1.5 text-sm font-medium text-blue-400 mt-auto">
-                <span>Real-time insights</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-            
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <BarChart3 className="w-10 h-10 text-blue-400 mb-6 relative mx-auto" />
-              <h3 className="text-xl font-semibold text-white mb-4 relative text-center">Rich Analytics</h3>
-              <p className="text-white/70 relative mb-6 text-center">Deep insights into every customer interaction</p>
-              <div className="flex items-center justify-center gap-2 text-sm font-medium text-blue-400 relative">
-                <span>Real-time insights</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
+        {/* CTA Section */}
+        <div className="text-center mt-20">
+          <RouterLink
+            to="/get-started"
+            className="group relative inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+            <span className="relative flex items-center gap-2">
+              Convert More With AI <Sparkles className="w-4 h-4" />
+            </span>
+          </RouterLink>
         </div>
       </div>
     </div>

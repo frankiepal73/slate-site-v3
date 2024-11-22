@@ -36,6 +36,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://chatwithslate.com/faqs</loc>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://chatwithslate.com/pricing</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>monthly</changefreq>

@@ -80,6 +80,9 @@ export function Navigation() {
             >
               Pricing
             </button>
+            <Link to="/faqs" className="text-white/70 hover:text-white transition-colors">
+              FAQs
+            </Link>
             <Link 
               to="/get-started"
               className="group relative px-4 py-2.5 bg-blue-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
@@ -98,7 +101,7 @@ export function Navigation() {
               className="group relative px-3 py-2 bg-blue-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
-              <span className="relative flex items-center gap-1.5">
+              <span className="relative flex items-center gap-2">
                 Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
               </span>
             </Link>
@@ -160,6 +163,25 @@ export function Navigation() {
             >
               Pricing
             </button>
+            <Link 
+              to="/faqs" 
+              className="block text-white/70 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+              role="menuitem"
+            >
+              FAQs
+            </Link>
+            <Link 
+              to="/get-started"
+              className="block w-full group relative px-4 py-3 bg-blue-500 rounded-xl text-white text-center font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
+              onClick={() => setIsMobileMenuOpen(false)}
+              role="menuitem"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+              <span className="relative flex items-center justify-center gap-2">
+                Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
+              </span>
+            </Link>
           </div>
         </div>
       )}

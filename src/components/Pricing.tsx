@@ -6,7 +6,7 @@ const tiers = [
   {
     name: 'Standard Assistant',
     description: 'Perfect to cover your basics',
-    setupFee: 399,
+    setupFee: 299,
     monthlyPrice: 99,
     featured: false,
     features: [
@@ -20,7 +20,7 @@ const tiers = [
   {
     name: 'Advanced Assistant',
     description: 'Enhanced features for growing businesses',
-    setupFee: 499,
+    setupFee: 349,
     monthlyPrice: 199,
     featured: false,
     features: [
@@ -39,7 +39,7 @@ const tiers = [
   {
     name: 'Premium Package',
     description: 'Complete solution with ongoing support',
-    setupFee: 599,
+    setupFee: 399,
     monthlyPrice: 299,
     featured: true,
     features: [
@@ -77,7 +77,7 @@ export function Pricing() {
   }, []);
 
   const calculateDiscountedPrice = (price: number): number => {
-    return hasDiscount ? Math.floor(price * 0.8) : price; // Updated from 0.9 to 0.8 for 20% discount
+    return hasDiscount ? Math.floor(price * 0.8) : price;
   };
 
   return (
