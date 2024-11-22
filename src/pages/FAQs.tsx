@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bot, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -60,6 +60,42 @@ const faqs: FAQ[] = [
 
 export function FAQs() {
   const [openQuestions, setOpenQuestions] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    // Hide chatbot on mount
+    const hideChat = () => {
+      const overlay = document.getElementById('VG_OVERLAY_CONTAINER');
+      const widget = document.getElementById('vg-widget-container');
+      
+      if (overlay) overlay.style.display = 'none';
+      if (widget) widget.style.display = 'none';
+    };
+
+    // Initial hide
+    hideChat();
+
+    // Set up observer to handle dynamic loading
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(() => {
+        hideChat();
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Cleanup
+    return () => {
+      observer.disconnect();
+      const overlay = document.getElementById('VG_OVERLAY_CONTAINER');
+      const widget = document.getElementById('vg-widget-container');
+      
+      if (overlay) overlay.style.display = 'block';
+      if (widget) widget.style.display = 'block';
+    };
+  }, []);
 
   const toggleQuestion = (index: string) => {
     setOpenQuestions(prev => ({
