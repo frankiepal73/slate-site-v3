@@ -17,7 +17,7 @@ export function FormProgress({ steps, currentStep }: FormProgressProps) {
       aria-valuemin={0}
       aria-valuemax={steps.length}
       aria-valuenow={currentStep + 1}
-      id="form-progress"
+      id="form-progress-container"
       data-gtm-category="Form Progress"
       data-gtm-action="view"
       data-gtm-label={`Step ${currentStep + 1} of ${steps.length}`}
@@ -30,24 +30,26 @@ export function FormProgress({ steps, currentStep }: FormProgressProps) {
       </div>
       <div className="absolute -top-2 left-0 right-0 flex justify-between">
         {steps.map((step, index) => (
-          <div 
+          <button 
             key={index}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
               index <= currentStep 
                 ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
                 : 'bg-white/10 text-white/50'
             }`}
-            id={`progress-step-${index}`}
+            id={`progress-step-button-${index}`}
             data-gtm-category="Form Progress"
-            data-gtm-action="view"
+            data-gtm-action="click"
             data-gtm-label={`Step ${index + 1} - ${step.title}`}
+            disabled={index > currentStep + 1}
+            aria-current={index === currentStep ? 'step' : undefined}
           >
             {index < currentStep ? (
               <Check className="w-4 h-4" />
             ) : (
               <step.icon className="w-4 h-4" />
             )}
-          </div>
+          </button>
         ))}
       </div>
     </div>

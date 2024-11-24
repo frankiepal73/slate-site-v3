@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Star, Zap, Clock, Target, TrendingUp } from 'lucide-react';
+import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Star, Zap, Clock, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CountdownTimer } from './CountdownTimer';
 
@@ -37,7 +37,6 @@ export function Hero() {
       data-gtm-action="view"
       data-gtm-label="Hero Section"
     >
-      {/* Show countdown timer if discount is available */}
       {showDiscount && (
         <CountdownTimer 
           initialMinutes={15} 
@@ -45,15 +44,12 @@ export function Hero() {
         />
       )}
       
-      {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 animate-gradient"></div>
       
-      {/* Floating elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/30 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl animate-float-delayed"></div>
         
-        {/* Floating icons */}
         <div className="absolute top-1/4 left-1/4 animate-float">
           <MessageSquare className="w-8 h-8 text-blue-400/40" />
         </div>
@@ -65,9 +61,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Main content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        {/* Bot Icon */}
         <div className="flex justify-center mb-4">
           <div className="relative">
             <Bot className="w-16 h-16 text-white/90 animate-pulse" />
@@ -75,13 +69,12 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Rating Pill */}
         <div className="flex justify-center mb-6">
-          <div 
+          <button 
             className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 animate-pulse hover:bg-white/10 transition-all"
-            id="hero-rating"
+            id="hero-rating-button"
             data-gtm-category="Hero"
-            data-gtm-action="view"
+            data-gtm-action="click"
             data-gtm-label="Rating Badge"
           >
             <div className="flex">
@@ -97,7 +90,7 @@ export function Hero() {
               </div>
             </div>
             <span className="text-white/70 text-sm">Rated 4.9 by happy clients</span>
-          </div>
+          </button>
         </div>
 
         <h1 className="text-center">
@@ -115,21 +108,20 @@ export function Hero() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold"> transforms conversations into conversions</span>
           </p>
           
-          {/* Social Proof Pills */}
           <div className="flex flex-wrap justify-center gap-4 mt-8 mb-8">
             {socialProof.map((item, index) => (
-              <span 
+              <button 
                 key={index}
                 className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl text-white/70 text-sm flex items-center gap-2 hover:bg-white/10 transition-colors"
-                id={`social-proof-${index}`}
+                id={`social-proof-button-${index}`}
                 data-gtm-category="Hero"
-                data-gtm-action="view"
+                data-gtm-action="click"
                 data-gtm-label={`Social Proof - ${item.label}`}
               >
                 <item.icon className="w-4 h-4 text-blue-400" />
                 <span className="font-semibold text-white">{item.metric}</span>
                 {item.label}
-              </span>
+              </button>
             ))}
           </div>
         </div>
@@ -138,7 +130,7 @@ export function Hero() {
           <button 
             onClick={handleGetStarted}
             className="w-full group relative px-10 py-5 bg-blue-500 rounded-2xl text-lg text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
-            id="hero-cta"
+            id="hero-cta-button"
             data-gtm-category="CTA"
             data-gtm-action="click"
             data-gtm-label="Hero - Convert More With AI"
@@ -150,17 +142,22 @@ export function Hero() {
           </button>
         </div>
 
-        {/* Scroll indicator */}
         <div className="flex justify-center w-full">
-          <div 
-            className="w-8 h-12 rounded-full border-2 border-white/20 flex items-start justify-center p-2"
-            id="scroll-indicator"
+          <button 
+            className="w-8 h-12 rounded-full border-2 border-white/20 flex items-start justify-center p-2 hover:border-white/30 transition-colors"
+            id="scroll-indicator-button"
             data-gtm-category="Hero"
-            data-gtm-action="view"
+            data-gtm-action="click"
             data-gtm-label="Scroll Indicator"
+            onClick={() => {
+              const featuresSection = document.getElementById('features');
+              if (featuresSection) {
+                featuresSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
             <div className="w-1 h-3 bg-white/20 rounded-full animate-bounce"></div>
-          </div>
+          </button>
         </div>
       </div>
     </div>

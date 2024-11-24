@@ -34,7 +34,7 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
           ? 'bg-blue-500/20 border-2 border-blue-500'
           : !isPremium ? 'bg-white/5 border-2 border-transparent hover:bg-white/10' : 'hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20'
       }`}
-      id={`package-${packageId}`}
+      id={`package-select-button-${packageId}`}
       data-gtm-category="Package Selection"
       data-gtm-action="click"
       data-gtm-label={pkg.name}
@@ -43,7 +43,7 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
     >
       {isPremium && (
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
-          <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full text-base font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25">
+          <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full text-base font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25 whitespace-nowrap">
             <Sparkles className="w-4 h-4" />
             Best Value
             <Sparkles className="w-4 h-4" />
@@ -84,7 +84,6 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
           <div 
             key={index} 
             className="flex items-center gap-2"
-            id={`${packageId}-feature-${index}`}
           >
             <Check className="w-4 h-4 text-blue-400 flex-shrink-0" />
             <span className="text-white/70 text-sm">{feature}</span>

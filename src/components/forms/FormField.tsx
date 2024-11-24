@@ -22,6 +22,12 @@ interface FormFieldProps {
 export function FormField({ field, value, onChange, error, stepTitle }: FormFieldProps) {
   const fieldId = `${stepTitle}-${field.label}`.toLowerCase().replace(/\s+/g, '-');
 
+  const gtmProps = {
+    'data-gtm-category': 'Form Field',
+    'data-gtm-action': 'interact',
+    'data-gtm-label': `${stepTitle} - ${field.label}`
+  };
+
   if (field.type === 'select') {
     return (
       <SelectField
@@ -30,10 +36,8 @@ export function FormField({ field, value, onChange, error, stepTitle }: FormFiel
         value={value}
         onChange={onChange}
         required={field.required}
-        id={fieldId}
-        data-gtm-category="Form"
-        data-gtm-action="select"
-        data-gtm-label={`${stepTitle} - ${field.label}`}
+        id={`${fieldId}-select`}
+        {...gtmProps}
       />
     );
   }
@@ -52,10 +56,8 @@ export function FormField({ field, value, onChange, error, stepTitle }: FormFiel
           onChange(newSelected);
         }}
         required={field.required}
-        id={fieldId}
-        data-gtm-category="Form"
-        data-gtm-action="checkbox"
-        data-gtm-label={`${stepTitle} - ${field.label}`}
+        id={`${fieldId}-checkbox-group`}
+        {...gtmProps}
       />
     );
   }
@@ -67,10 +69,8 @@ export function FormField({ field, value, onChange, error, stepTitle }: FormFiel
         checked={value === 'true'}
         onChange={(checked) => onChange(checked.toString())}
         required={field.required}
-        id={fieldId}
-        data-gtm-category="Form"
-        data-gtm-action="checkbox"
-        data-gtm-label={`${stepTitle} - ${field.label}`}
+        id={`${fieldId}-single-checkbox`}
+        {...gtmProps}
       />
     );
   }
@@ -84,10 +84,8 @@ export function FormField({ field, value, onChange, error, stepTitle }: FormFiel
       placeholder={field.placeholder}
       required={field.required}
       error={error}
-      id={fieldId}
-      data-gtm-category="Form"
-      data-gtm-action="input"
-      data-gtm-label={`${stepTitle} - ${field.label}`}
+      id={`${fieldId}-input`}
+      {...gtmProps}
     />
   );
 }

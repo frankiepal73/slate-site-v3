@@ -62,7 +62,7 @@ export function Navigation() {
           <button 
             onClick={() => handleNavigation('/')}
             className="flex items-center gap-2"
-            id="nav-logo"
+            id="nav-logo-button"
             data-gtm-category="Navigation"
             data-gtm-action="click"
             data-gtm-label="Logo"
@@ -76,7 +76,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-home"
+              id="nav-home-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Home"
@@ -86,7 +86,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/why-us')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-why-us"
+              id="nav-why-us-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Why Us"
@@ -96,7 +96,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/how-this-works')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-how-it-works"
+              id="nav-how-it-works-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="How It Works"
@@ -106,7 +106,7 @@ export function Navigation() {
             <button 
               onClick={() => scrollToSection('features')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-features"
+              id="nav-features-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Features"
@@ -116,7 +116,7 @@ export function Navigation() {
             <button 
               onClick={() => scrollToSection('pricing')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-pricing"
+              id="nav-pricing-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Pricing"
@@ -126,7 +126,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/faqs')}
               className="text-white/70 hover:text-white transition-colors"
-              id="nav-faqs"
+              id="nav-faqs-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="FAQs"
@@ -136,7 +136,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/get-started')}
               className="group relative px-4 py-2.5 bg-blue-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
-              id="nav-cta-desktop"
+              id="nav-cta-desktop-button"
               data-gtm-category="CTA"
               data-gtm-action="click"
               data-gtm-label="Desktop Nav - Convert More With AI"
@@ -153,7 +153,7 @@ export function Navigation() {
             <button 
               onClick={() => handleNavigation('/get-started')}
               className="group relative px-3 py-2 bg-blue-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
-              id="nav-cta-mobile"
+              id="nav-cta-mobile-button"
               data-gtm-category="CTA"
               data-gtm-action="click"
               data-gtm-label="Mobile Nav - Start Converting"
@@ -168,7 +168,7 @@ export function Navigation() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle menu"
-              id="mobile-menu-toggle"
+              id="mobile-menu-toggle-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile Menu Toggle"
@@ -192,7 +192,7 @@ export function Navigation() {
               onClick={() => handleNavigation('/')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-home"
+              id="mobile-nav-home-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - Home"
@@ -203,7 +203,7 @@ export function Navigation() {
               onClick={() => handleNavigation('/why-us')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-why-us"
+              id="mobile-nav-why-us-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - Why Us"
@@ -214,7 +214,7 @@ export function Navigation() {
               onClick={() => handleNavigation('/how-this-works')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-how-it-works"
+              id="mobile-nav-how-it-works-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - How It Works"
@@ -225,7 +225,7 @@ export function Navigation() {
               onClick={() => scrollToSection('features')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-features"
+              id="mobile-nav-features-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - Features"
@@ -236,7 +236,7 @@ export function Navigation() {
               onClick={() => scrollToSection('pricing')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-pricing"
+              id="mobile-nav-pricing-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - Pricing"
@@ -247,7 +247,7 @@ export function Navigation() {
               onClick={() => handleNavigation('/faqs')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
-              id="mobile-nav-faqs"
+              id="mobile-nav-faqs-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
               data-gtm-label="Mobile - FAQs"
@@ -259,7 +259,7 @@ export function Navigation() {
                 onClick={() => handleNavigation('/get-started')}
                 className="block w-full group relative px-4 py-3 bg-blue-500 rounded-xl text-white text-center font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
                 role="menuitem"
-                id="mobile-nav-cta"
+                id="mobile-nav-cta-button"
                 data-gtm-category="CTA"
                 data-gtm-action="click"
                 data-gtm-label="Mobile Menu - Start Converting"

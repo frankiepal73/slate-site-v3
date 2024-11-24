@@ -18,6 +18,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Disable pointer events on button children for GTM tracking */
+  button > * {
+    pointer-events: none;
+  }
+
   /* iOS specific styles */
   @supports (-webkit-touch-callout: none) {
     .min-h-screen {

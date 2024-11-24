@@ -26,12 +26,7 @@ export function InputField({
   ...gtmProps
 }: InputFieldProps) {
   return (
-    <div 
-      className="space-y-2"
-      data-gtm-category="Form Field"
-      data-gtm-action="view"
-      data-gtm-label={`Input - ${label}`}
-    >
+    <div className="space-y-2">
       <label 
         htmlFor={id}
         className="block text-sm font-medium text-white/70"

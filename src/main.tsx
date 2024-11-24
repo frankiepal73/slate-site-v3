@@ -3,7 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { LoadingScreen } from './components/LoadingScreen';
+import { setupGTMClickHandling } from './utils/gtm';
 import './index.css';
+
+// Set up GTM click handling
+setupGTMClickHandling();
 
 // Lazy load App with controlled timing
 const App = lazy(() => 

@@ -22,13 +22,11 @@ export function CheckboxField({
   ...gtmProps
 }: CheckboxFieldProps) {
   return (
-    <div 
-      className="space-y-2"
-      data-gtm-category="Form Field"
-      data-gtm-action="view"
-      data-gtm-label={`Checkbox Group - ${label}`}
-    >
-      <label className="block text-sm font-medium text-white/70">
+    <div className="space-y-2">
+      <label 
+        id={`${id}-label`}
+        className="block text-sm font-medium text-white/70"
+      >
         {label}
         {required && <span className="text-red-400 ml-1">*</span>}
       </label>
@@ -48,13 +46,23 @@ export function CheckboxField({
               type="checkbox"
               className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500"
               checked={selectedOptions.includes(option)}
-              onChange={() => onChange(option)}
+              onChange={() => {
+                onChange(option);
+                // GTM tracking for checkbox toggle
+                const event = new CustomEvent('gtm.click', {
+                  detail: {
+                    category: gtmProps['data-gtm-category'],
+                    action: 'toggle',
+                    label: `${gtmProps['data-gtm-label']} - ${option}`
+                  }
+                });
+                document.dispatchEvent(event);
+              }}
               required={required && selectedOptions.length === 0}
               aria-required={required}
-              data-gtm-category="Form Field"
-              data-gtm-action="checkbox"
-              data-gtm-label={`${label} - ${option}`}
-              {...gtmProps}
+              data-gtm-category={gtmProps['data-gtm-category']}
+              data-gtm-action="toggle"
+              data-gtm-label={`${gtmProps['data-gtm-label']} - ${option}`}
             />
             <span className="text-white group-hover:text-white/90 transition-colors">
               {option}

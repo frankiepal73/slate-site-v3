@@ -23,16 +23,24 @@ export function SingleCheckboxField({
     <label 
       htmlFor={id}
       className="flex items-start gap-2 cursor-pointer group"
-      data-gtm-category="Form Field"
-      data-gtm-action="view"
-      data-gtm-label={`Single Checkbox - ${text}`}
     >
       <input
         id={id}
         type="checkbox"
         className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 mt-1"
         checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        onChange={(e) => {
+          onChange(e.target.checked);
+          // GTM tracking for checkbox toggle
+          const event = new CustomEvent('gtm.click', {
+            detail: {
+              category: gtmProps['data-gtm-category'],
+              action: 'toggle',
+              label: `${gtmProps['data-gtm-label']} - ${text}`
+            }
+          });
+          document.dispatchEvent(event);
+        }}
         required={required}
         aria-required={required}
         {...gtmProps}

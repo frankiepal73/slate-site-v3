@@ -26,7 +26,7 @@ export function SuccessModal({ show, onClose }: SuccessModalProps) {
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Close modal"
-            id="success-modal-close"
+            id="success-modal-close-button"
             data-gtm-category="Modal"
             data-gtm-action="click"
             data-gtm-label="Close Success Modal"
