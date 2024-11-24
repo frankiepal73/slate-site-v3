@@ -1,6 +1,6 @@
 import React from 'react';
-import { ShoppingCart, Users, Calendar, MessageSquareMore, Globe, BarChart3, Zap, Link, Sparkles } from 'lucide-react';
-import { Link as RouterLink } from 'react-router-dom';
+import { ShoppingCart, Users, Calendar, MessageSquareMore, Globe, BarChart3, Zap, Link as LinkIcon, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const features = [
   {
@@ -42,6 +42,12 @@ const features = [
 ];
 
 export function Features() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
+
   return (
     <div id="features" className="relative bg-slate-900 py-32">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]"></div>
@@ -79,7 +85,7 @@ export function Features() {
                   <p className="text-white/70 mb-4">{feature.description}</p>
                   <div className="flex items-center gap-2 text-sm font-medium text-blue-400">
                     <span>{feature.highlight}</span>
-                    <Link className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <LinkIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -89,8 +95,8 @@ export function Features() {
 
         {/* CTA Section */}
         <div className="text-center mt-20">
-          <RouterLink
-            to="/get-started"
+          <button
+            onClick={handleGetStarted}
             className="group relative inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
             id="features-cta"
             data-gtm-category="CTA"
@@ -101,7 +107,7 @@ export function Features() {
             <span className="relative flex items-center gap-2">
               Convert More With AI <Sparkles className="w-4 h-4" />
             </span>
-          </RouterLink>
+          </button>
         </div>
       </div>
     </div>

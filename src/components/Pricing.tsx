@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Check, Sparkles, Bot, BarChart, Users, Calendar, MessageSquare, Database, Zap, ShoppingCart, Code, Layout, Palette, History, UserPlus, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { 
+  Bot, 
+  Sparkles, 
+  MessageSquare, 
+  Database,
+  Globe,
+  Check,
+  Users,
+  BarChart,
+  Calendar,
+  Layout,
+  Palette,
+  UserPlus,
+  ShoppingCart,
+  Zap
+} from 'lucide-react';
 
 const tiers = [
   {
@@ -13,7 +28,7 @@ const tiers = [
       { text: 'Lead Capture + Email Notification', icon: Database },
       { text: '24/7 Personalized Customer Support', icon: MessageSquare },
       { text: 'Custom Branding: Agent Launcher & Avatar', icon: Bot },
-      { text: 'Done-For-You Website Code Installation', icon: Code },
+      { text: 'Done-For-You Website Code Installation', icon: Bot },
       { text: 'Support Across 29+ Languages', icon: Globe }
     ]
   },
@@ -55,6 +70,7 @@ const tiers = [
 
 export function Pricing() {
   const [hasDiscount, setHasDiscount] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkDiscount = () => {
@@ -67,14 +83,14 @@ export function Pricing() {
       }
     };
 
-    // Check initially
     checkDiscount();
-
-    // Set up interval to check regularly
     const intervalId = setInterval(checkDiscount, 1000);
-
     return () => clearInterval(intervalId);
   }, []);
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
 
   const calculateDiscountedPrice = (price: number): number => {
     return hasDiscount ? Math.floor(price * 0.8) : price;
@@ -128,8 +144,8 @@ export function Pricing() {
                 tier.featured ? 'border-2 border-blue-500/30' : ''
               }`}>
                 {tier.featured && (
-                  <div className="absolute -top-4 left-4 z-10">
-                    <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-base font-semibold bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25">
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
+                    <div className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-lg font-semibold bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25">
                       <Sparkles className="w-5 h-5" />
                       Best Value
                       <Sparkles className="w-5 h-5" />
@@ -173,9 +189,9 @@ export function Pricing() {
                     ))}
                   </div>
 
-                  <Link
-                    to="/get-started"
-                    className={`block w-full py-4 px-8 rounded-xl font-medium text-center transition-all ${
+                  <button
+                    onClick={handleGetStarted}
+                    className={`w-full py-4 px-8 rounded-xl font-medium text-center transition-all ${
                       tier.featured
                         ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25'
                         : 'bg-white/10 text-white hover:bg-white/20'
@@ -186,27 +202,26 @@ export function Pricing() {
                     data-gtm-label={`Pricing - ${tier.name}`}
                   >
                     Convert More With AI
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Fun CTA */}
         <div className="text-center mt-32">
           <h2 className="text-3xl font-bold text-white mb-8">Ready for Takeoff? 🚀</h2>
           
-          <Link
-            to="/get-started"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
+          <button
+            onClick={handleGetStarted}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
             id="pricing-bottom-cta"
             data-gtm-category="CTA"
             data-gtm-action="click"
             data-gtm-label="Pricing Bottom - Convert More With AI"
           >
             I'm ready to start saving time, booking more appointments, selling more products, and making my business more awesome
-          </Link>
+          </button>
         </div>
       </div>
     </div>

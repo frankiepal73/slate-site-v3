@@ -26,7 +26,12 @@ export function InputField({
   ...gtmProps
 }: InputFieldProps) {
   return (
-    <div className="space-y-2">
+    <div 
+      className="space-y-2"
+      data-gtm-category="Form Field"
+      data-gtm-action="view"
+      data-gtm-label={`Input - ${label}`}
+    >
       <label 
         htmlFor={id}
         className="block text-sm font-medium text-white/70"
@@ -43,10 +48,20 @@ export function InputField({
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
         value={value || ''}
+        required={required}
+        aria-required={required}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? `${id}-error` : undefined}
         {...gtmProps}
       />
       {error && (
-        <p className="text-sm text-red-400 mt-1">{error}</p>
+        <p 
+          className="text-sm text-red-400 mt-1"
+          id={`${id}-error`}
+          role="alert"
+        >
+          {error}
+        </p>
       )}
     </div>
   );

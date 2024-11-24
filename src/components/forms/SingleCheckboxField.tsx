@@ -23,6 +23,9 @@ export function SingleCheckboxField({
     <label 
       htmlFor={id}
       className="flex items-start gap-2 cursor-pointer group"
+      data-gtm-category="Form Field"
+      data-gtm-action="view"
+      data-gtm-label={`Single Checkbox - ${text}`}
     >
       <input
         id={id}
@@ -30,6 +33,8 @@ export function SingleCheckboxField({
         className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 mt-1"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
+        required={required}
+        aria-required={required}
         {...gtmProps}
       />
       <span className="text-white group-hover:text-white/90 transition-colors">

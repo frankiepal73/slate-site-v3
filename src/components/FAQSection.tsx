@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bot, ChevronDown, ChevronUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface FAQ {
   question: string;
@@ -59,6 +59,7 @@ const faqs: FAQ[] = [
 ];
 
 export function FAQSection() {
+  const navigate = useNavigate();
   const [openQuestions, setOpenQuestions] = useState<Record<string, boolean>>({});
 
   const toggleQuestion = (index: string) => {
@@ -68,12 +69,15 @@ export function FAQSection() {
     }));
   };
 
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
+
   return (
     <div id="faqs" className="relative bg-slate-900 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.1),transparent)]"></div>
       
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
             <Bot className="w-8 h-8 text-blue-400" />
@@ -86,16 +90,25 @@ export function FAQSection() {
           </p>
         </div>
 
-        {/* FAQs */}
         <div className="space-y-4 mb-16">
           {faqs.map((faq, index) => (
             <div
               key={index}
               className="group relative bg-white/5 backdrop-blur-xl rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300"
+              id={`faq-${index}`}
+              data-gtm-category="FAQ"
+              data-gtm-action="view"
+              data-gtm-label={`FAQ Item ${index + 1}`}
             >
               <button
                 className="w-full px-6 py-4 text-left flex items-center justify-between"
                 onClick={() => toggleQuestion(index.toString())}
+                aria-expanded={openQuestions[index.toString()]}
+                aria-controls={`faq-content-${index}`}
+                id={`faq-button-${index}`}
+                data-gtm-category="FAQ"
+                data-gtm-action="click"
+                data-gtm-label={`Toggle FAQ ${index + 1}`}
               >
                 <span className="text-lg font-medium text-white">{faq.question}</span>
                 {openQuestions[index.toString()] ? (
@@ -106,10 +119,13 @@ export function FAQSection() {
               </button>
               
               <div
+                id={`faq-content-${index}`}
                 className={`
                   px-6 overflow-hidden transition-all duration-300 ease-in-out
                   ${openQuestions[index.toString()] ? 'max-h-96 pb-6' : 'max-h-0'}
                 `}
+                role="region"
+                aria-labelledby={`faq-button-${index}`}
               >
                 <div className="text-white/70">
                   {faq.answer}
@@ -119,16 +135,19 @@ export function FAQSection() {
           ))}
         </div>
 
-        {/* Fun CTA */}
         <div className="text-center mt-32">
           <h2 className="text-3xl font-bold text-white mb-8">Ready for Takeoff? 🚀</h2>
           
-          <Link
-            to="/get-started"
+          <button
+            onClick={handleGetStarted}
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
+            id="faq-cta"
+            data-gtm-category="CTA"
+            data-gtm-action="click"
+            data-gtm-label="FAQ - Get Started"
           >
             I'm ready to start saving time, booking more appointments, selling more products, and making my business more awesome
-          </Link>
+          </button>
         </div>
       </div>
     </div>

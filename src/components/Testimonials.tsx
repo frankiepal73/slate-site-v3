@@ -1,6 +1,6 @@
 import React from 'react';
 import { Star, Quote, MessageSquare, TrendingUp, Sparkles, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const testimonials = [
   {
@@ -62,6 +62,12 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
+
   return (
     <div className="relative bg-slate-900 py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(147,51,234,0.1),transparent)]"></div>
@@ -84,37 +90,35 @@ export function Testimonials() {
             <div
               key={index}
               className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300"
+              id={`testimonial-${index}`}
+              data-gtm-category="Testimonial"
+              data-gtm-action="view"
+              data-gtm-label={`Testimonial ${index + 1}`}
             >
               <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
               
               <div className="relative">
-                {/* Quote Icon */}
                 <div className="absolute -top-4 -left-2 text-blue-400/20 transform -rotate-12">
                   <Quote className="w-12 h-12" />
                 </div>
 
-                {/* Header Section */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 mb-6">
-                  {/* Rating */}
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
 
-                  {/* Highlight Badge */}
                   <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full w-fit">
                     <testimonial.icon className="w-4 h-4 text-blue-400" />
                     <span className="text-sm font-medium text-blue-400 whitespace-nowrap">{testimonial.highlight}</span>
                   </div>
                 </div>
                 
-                {/* Content */}
                 <div className="relative">
                   <p className="text-white/90 mb-6 text-lg leading-relaxed whitespace-pre-line">{testimonial.content}</p>
                 </div>
                 
-                {/* Author */}
                 <div className="flex flex-col mt-8">
                   <h4 className="text-white font-medium">{testimonial.name}</h4>
                   <p className="text-white/70 text-sm">{testimonial.role}</p>
@@ -124,14 +128,17 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* CTA Section */}
         <div className="text-center mt-16">
-          <Link
-            to="/get-started"
+          <button
+            onClick={handleGetStarted}
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            id="testimonials-cta"
+            data-gtm-category="CTA"
+            data-gtm-action="click"
+            data-gtm-label="Testimonials - Get Started"
           >
             Convert More With AI
-          </Link>
+          </button>
         </div>
       </div>
     </div>

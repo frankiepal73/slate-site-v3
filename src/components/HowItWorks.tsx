@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bot, Package, Code, PartyPopper, Flag, SmilePlus, CheckCircle2, Sparkles, Book } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {
@@ -45,6 +45,12 @@ const steps = [
 ];
 
 export function HowItWorks() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
+
   return (
     <div id="how-it-works" className="relative bg-slate-900 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.2),transparent)]"></div>
@@ -62,17 +68,14 @@ export function HowItWorks() {
         </div>
 
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-[28px] top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 to-purple-500/50"></div>
 
-          {/* Steps */}
           <div className="space-y-24">
             {steps.map((step, index) => (
               <div
                 key={index}
                 className={`relative pl-20 ${index === 3 ? 'animate-float' : ''}`}
               >
-                {/* Step Number Bubble */}
                 <div className={`
                   absolute left-0 flex items-center justify-center w-14 h-14 rounded-full
                   ${step.isCompleted 
@@ -87,7 +90,6 @@ export function HowItWorks() {
                   )}
                 </div>
 
-                {/* Content Card */}
                 <div className={`
                   group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl 
                   hover:bg-white/10 transition-all duration-300
@@ -112,23 +114,15 @@ export function HowItWorks() {
                     <h3 className={`text-2xl font-semibold text-white mb-4 ${index === 3 ? 'text-center' : ''}`}>{step.title}</h3>
                     {index !== 3 && <p className="text-white/70 leading-relaxed">{step.description}</p>}
 
-                    {/* Paths under step 4 */}
                     {step.paths && (
                       <div className="relative mt-8">
-                        {/* Wireframe connectors - Visible on all screens */}
                         <div className="relative">
-                          {/* Vertical line from step 4 */}
                           <div className="absolute left-1/2 -top-2 h-8 w-px bg-gradient-to-b from-blue-500/50 to-purple-500/50"></div>
-                          
-                          {/* Horizontal connector - Only on md and up */}
                           <div className="absolute top-6 left-1/4 right-1/4 h-px bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-blue-500/50 hidden md:block"></div>
-                          
-                          {/* Vertical connectors to boxes */}
                           <div className="absolute top-6 left-1/2 md:left-1/4 h-6 w-px bg-gradient-to-b from-blue-500/50 to-purple-500/50"></div>
                           <div className="absolute top-6 right-1/4 h-6 w-px bg-gradient-to-b from-blue-500/50 to-purple-500/50 hidden md:block"></div>
                         </div>
 
-                        {/* Paths grid */}
                         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 pt-12">
                           {step.paths.map((path, pathIndex) => (
                             <React.Fragment key={pathIndex}>
@@ -141,15 +135,12 @@ export function HowItWorks() {
                                     border border-green-600/30
                                   `}
                                 >
-                                  {/* Check Circle Icon */}
                                   <div className="absolute top-4 left-4">
                                     <CheckCircle2 className="w-6 h-6 text-green-400" />
                                   </div>
                                   
-                                  {/* Shimmer effect */}
                                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-shimmer"></div>
                                   
-                                  {/* Glow effect */}
                                   <div className="absolute -inset-px bg-green-600/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
                                   
                                   <div className="relative flex flex-col items-start gap-2 pt-8">
@@ -160,7 +151,6 @@ export function HowItWorks() {
                                   </div>
                                 </div>
                               </div>
-                              {/* OR divider - Only show between items on mobile */}
                               {pathIndex === 0 && (
                                 <div className="md:hidden flex justify-center -my-4">
                                   <span className="px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-medium text-sm">
@@ -172,7 +162,6 @@ export function HowItWorks() {
                           ))}
                         </div>
 
-                        {/* OR divider - Only visible on md and up */}
                         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 hidden md:block">
                           <span className="px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-medium text-sm">
                             OR
@@ -182,7 +171,6 @@ export function HowItWorks() {
                     )}
                   </div>
                 </div>
-                {/* Description text outside the box for step 4 */}
                 {index === 3 && (
                   <div className="text-center mt-8">
                     <p className="text-white/70 leading-relaxed">{step.description}</p>
@@ -193,16 +181,19 @@ export function HowItWorks() {
           </div>
         </div>
 
-        {/* CTA Section */}
         <div className="text-center mt-32">
           <h2 className="text-3xl font-bold text-white mb-8">Ready for Takeoff? 🚀</h2>
           
-          <Link
-            to="/get-started"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105"
+          <button
+            onClick={handleGetStarted}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            id="how-it-works-cta-primary"
+            data-gtm-category="CTA"
+            data-gtm-action="click"
+            data-gtm-label="How It Works - Get Started"
           >
             I'm ready to start saving time, booking more appointments, selling more products, and making my business more awesome
-          </Link>
+          </button>
         </div>
       </div>
     </div>

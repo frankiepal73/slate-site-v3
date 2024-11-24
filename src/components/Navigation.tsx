@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Bot, Menu, X, Sparkles } from 'lucide-react';
 
 export function Navigation() {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasDiscount] = useState(() => {
@@ -23,6 +24,11 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -53,8 +59,8 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link 
-            to="/" 
+          <button 
+            onClick={() => handleNavigation('/')}
             className="flex items-center gap-2"
             id="nav-logo"
             data-gtm-category="Navigation"
@@ -63,12 +69,12 @@ export function Navigation() {
           >
             <Bot className="w-8 h-8 text-blue-400" />
             <span className="text-xl font-bold text-white">Slate</span>
-          </Link>
+          </button>
 
-          {/* Desktop Navigation - Only show on lg screens and up */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link 
-              to="/" 
+            <button 
+              onClick={() => handleNavigation('/')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-home"
               data-gtm-category="Navigation"
@@ -76,9 +82,9 @@ export function Navigation() {
               data-gtm-label="Home"
             >
               Home
-            </Link>
-            <Link 
-              to="/why-us" 
+            </button>
+            <button 
+              onClick={() => handleNavigation('/why-us')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-why-us"
               data-gtm-category="Navigation"
@@ -86,9 +92,9 @@ export function Navigation() {
               data-gtm-label="Why Us"
             >
               Why Us
-            </Link>
-            <Link 
-              to="/how-this-works" 
+            </button>
+            <button 
+              onClick={() => handleNavigation('/how-this-works')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-how-it-works"
               data-gtm-category="Navigation"
@@ -96,9 +102,9 @@ export function Navigation() {
               data-gtm-label="How It Works"
             >
               How It Works
-            </Link>
+            </button>
             <button 
-              onClick={() => scrollToSection('features')} 
+              onClick={() => scrollToSection('features')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-features"
               data-gtm-category="Navigation"
@@ -108,7 +114,7 @@ export function Navigation() {
               Features
             </button>
             <button 
-              onClick={() => scrollToSection('pricing')} 
+              onClick={() => scrollToSection('pricing')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-pricing"
               data-gtm-category="Navigation"
@@ -117,8 +123,8 @@ export function Navigation() {
             >
               Pricing
             </button>
-            <Link 
-              to="/faqs" 
+            <button 
+              onClick={() => handleNavigation('/faqs')}
               className="text-white/70 hover:text-white transition-colors"
               id="nav-faqs"
               data-gtm-category="Navigation"
@@ -126,9 +132,9 @@ export function Navigation() {
               data-gtm-label="FAQs"
             >
               FAQs
-            </Link>
-            <Link 
-              to="/get-started"
+            </button>
+            <button 
+              onClick={() => handleNavigation('/get-started')}
               className="group relative px-4 py-2.5 bg-blue-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
               id="nav-cta-desktop"
               data-gtm-category="CTA"
@@ -139,13 +145,13 @@ export function Navigation() {
               <span className="relative flex items-center gap-2">
                 Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
               </span>
-            </Link>
+            </button>
           </div>
 
-          {/* Mobile Navigation Controls - Show on screens smaller than lg */}
+          {/* Mobile Navigation Controls */}
           <div className="lg:hidden flex items-center gap-3">
-            <Link 
-              to="/get-started"
+            <button 
+              onClick={() => handleNavigation('/get-started')}
               className="group relative px-3 py-2 bg-blue-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
               id="nav-cta-mobile"
               data-gtm-category="CTA"
@@ -156,7 +162,7 @@ export function Navigation() {
               <span className="relative flex items-center gap-2">
                 Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
               </span>
-            </Link>
+            </button>
             <button 
               className="text-white p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -173,7 +179,7 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu - Show on screens smaller than lg */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div 
           className="lg:hidden bg-slate-800 border-t border-white/10"
@@ -182,10 +188,9 @@ export function Navigation() {
           id="mobile-menu"
         >
           <div className="px-4 py-4 space-y-4">
-            <Link 
-              to="/" 
-              className="block text-white/70 hover:text-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button 
+              onClick={() => handleNavigation('/')}
+              className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
               id="mobile-nav-home"
               data-gtm-category="Navigation"
@@ -193,11 +198,10 @@ export function Navigation() {
               data-gtm-label="Mobile - Home"
             >
               Home
-            </Link>
-            <Link 
-              to="/why-us" 
-              className="block text-white/70 hover:text-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+            </button>
+            <button 
+              onClick={() => handleNavigation('/why-us')}
+              className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
               id="mobile-nav-why-us"
               data-gtm-category="Navigation"
@@ -205,11 +209,10 @@ export function Navigation() {
               data-gtm-label="Mobile - Why Us"
             >
               Why Us
-            </Link>
-            <Link 
-              to="/how-this-works" 
-              className="block text-white/70 hover:text-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+            </button>
+            <button 
+              onClick={() => handleNavigation('/how-this-works')}
+              className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
               id="mobile-nav-how-it-works"
               data-gtm-category="Navigation"
@@ -217,7 +220,7 @@ export function Navigation() {
               data-gtm-label="Mobile - How It Works"
             >
               How It Works
-            </Link>
+            </button>
             <button 
               onClick={() => scrollToSection('features')}
               className="block w-full text-left text-white/70 hover:text-white transition-colors"
@@ -240,10 +243,9 @@ export function Navigation() {
             >
               Pricing
             </button>
-            <Link 
-              to="/faqs" 
-              className="block text-white/70 hover:text-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button 
+              onClick={() => handleNavigation('/faqs')}
+              className="block w-full text-left text-white/70 hover:text-white transition-colors"
               role="menuitem"
               id="mobile-nav-faqs"
               data-gtm-category="Navigation"
@@ -251,12 +253,11 @@ export function Navigation() {
               data-gtm-label="Mobile - FAQs"
             >
               FAQs
-            </Link>
+            </button>
             <div className="pt-2">
-              <Link 
-                to="/get-started"
+              <button 
+                onClick={() => handleNavigation('/get-started')}
                 className="block w-full group relative px-4 py-3 bg-blue-500 rounded-xl text-white text-center font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
-                onClick={() => setIsMobileMenuOpen(false)}
                 role="menuitem"
                 id="mobile-nav-cta"
                 data-gtm-category="CTA"
@@ -267,7 +268,7 @@ export function Navigation() {
                 <span className="relative flex items-center justify-center gap-2">
                   Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>

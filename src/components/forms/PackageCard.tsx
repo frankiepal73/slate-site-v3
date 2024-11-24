@@ -20,10 +20,12 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
   };
 
   const isPremium = pkg.name === 'Premium Package';
+  const packageId = pkg.name.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div
-      className={`relative p-4 sm:p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+    <button
+      onClick={onSelect}
+      className={`relative p-4 sm:p-6 rounded-xl text-left w-full transition-all duration-300 ${
         isPremium 
           ? 'border-2 border-blue-500/30 scale-105 bg-gradient-to-r from-blue-500/10 to-purple-500/10'
           : ''
@@ -32,13 +34,19 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
           ? 'bg-blue-500/20 border-2 border-blue-500'
           : !isPremium ? 'bg-white/5 border-2 border-transparent hover:bg-white/10' : 'hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20'
       }`}
-      onClick={onSelect}
+      id={`package-${packageId}`}
+      data-gtm-category="Package Selection"
+      data-gtm-action="click"
+      data-gtm-label={pkg.name}
+      aria-pressed={isSelected}
+      role="radio"
     >
       {isPremium && (
-        <div className="absolute -top-3 left-0 right-0 flex justify-center">
-          <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white">
-            <Sparkles className="w-3.5 h-3.5" />
+        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+          <span className="inline-flex items-center gap-1.5 py-2 px-4 rounded-full text-base font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white">
+            <Sparkles className="w-4 h-4" />
             Best Value
+            <Sparkles className="w-4 h-4" />
           </span>
         </div>
       )}
@@ -73,12 +81,16 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
 
       <div className="space-y-2">
         {pkg.features.map((feature, index) => (
-          <div key={index} className="flex items-center gap-2">
+          <div 
+            key={index} 
+            className="flex items-center gap-2"
+            id={`${packageId}-feature-${index}`}
+          >
             <Check className="w-4 h-4 text-blue-400 flex-shrink-0" />
             <span className="text-white/70 text-sm">{feature}</span>
           </div>
         ))}
       </div>
-    </div>
+    </button>
   );
 }

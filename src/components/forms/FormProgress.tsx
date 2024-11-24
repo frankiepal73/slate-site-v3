@@ -11,7 +11,17 @@ interface FormProgressProps {
 
 export function FormProgress({ steps, currentStep }: FormProgressProps) {
   return (
-    <div className="relative mb-12">
+    <div 
+      className="relative mb-12"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={steps.length}
+      aria-valuenow={currentStep + 1}
+      id="form-progress"
+      data-gtm-category="Form Progress"
+      data-gtm-action="view"
+      data-gtm-label={`Step ${currentStep + 1} of ${steps.length}`}
+    >
       <div className="h-2 bg-white/10 rounded-full">
         <div 
           className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500 ease-out"
@@ -27,6 +37,10 @@ export function FormProgress({ steps, currentStep }: FormProgressProps) {
                 ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
                 : 'bg-white/10 text-white/50'
             }`}
+            id={`progress-step-${index}`}
+            data-gtm-category="Form Progress"
+            data-gtm-action="view"
+            data-gtm-label={`Step ${index + 1} - ${step.title}`}
           >
             {index < currentStep ? (
               <Check className="w-4 h-4" />

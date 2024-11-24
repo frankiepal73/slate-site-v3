@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Bot, Brain, Globe2, Search, Sparkles, MessageSquare, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {
@@ -87,6 +87,7 @@ const steps = [
 
 export function WhyUs() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -110,9 +111,12 @@ export function WhyUs() {
     return () => observerRef.current?.disconnect();
   }, []);
 
+  const handleGetStarted = () => {
+    navigate('/get-started');
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 pt-32 pb-20 overflow-hidden">
-      {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
@@ -126,12 +130,9 @@ export function WhyUs() {
           </p>
         </div>
 
-        {/* Interactive Journey */}
         <div className="relative max-w-4xl mx-auto">
-          {/* Animated Path */}
           <div className="absolute left-[28px] top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-blue-500/50"></div>
 
-          {/* Steps */}
           <div className="space-y-24">
             {steps.map((step, index) => (
               <div
@@ -142,7 +143,6 @@ export function WhyUs() {
                   [&.animate-in]:opacity-100 [&.animate-in]:translate-x-0
                 `}
               >
-                {/* Step Number Bubble */}
                 <div className={`
                   absolute left-0 flex items-center justify-center w-14 h-14 rounded-full
                   bg-gradient-to-r ${step.color}
@@ -151,7 +151,6 @@ export function WhyUs() {
                   <step.icon className="w-6 h-6 text-white" />
                 </div>
 
-                {/* Content Card */}
                 <div className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300">
                   <div className={`
                     absolute -inset-px bg-gradient-to-r ${step.color} rounded-2xl
@@ -162,7 +161,6 @@ export function WhyUs() {
                     <h3 className="text-2xl font-semibold text-white mb-4">{step.title}</h3>
                     <p className="text-white/70 leading-relaxed mb-6">{step.description}</p>
 
-                    {/* Example Conversation */}
                     <div className="space-y-4 bg-black/20 rounded-xl p-6">
                       {step.conversation.map((message, mIndex) => (
                         <div
@@ -190,7 +188,6 @@ export function WhyUs() {
           </div>
         </div>
 
-        {/* CTA Section */}
         <div className="text-center mt-32">
           <h2 className="text-3xl font-bold text-white mb-6">
             Ready to Experience the Magic?
@@ -199,19 +196,17 @@ export function WhyUs() {
             Transform your customer interactions with Slate's AI-powered brilliance
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/get-started"
+          <div className="flex justify-center">
+            <button
+              onClick={handleGetStarted}
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+              id="why-us-cta"
+              data-gtm-category="CTA"
+              data-gtm-action="click"
+              data-gtm-label="Why Us - Get Started"
             >
               Get Started
-            </Link>
-            <Link
-              to="/watch-demo"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-all"
-            >
-              Watch Demo
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Bot, Facebook, Linkedin, Mail, Instagram } from 'lucide-react';
 
 // Custom X (Twitter) icon component to match Lucide style
@@ -23,19 +23,22 @@ const XIcon = () => (
 );
 
 export function Footer() {
+  const navigate = useNavigate();
   const location = useLocation();
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   const handleScroll = (sectionId: string) => {
-    // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
       window.location.href = `/#${sectionId}`;
       return;
     }
 
-    // If we're already on the home page, just scroll to the section
     const section = document.getElementById(sectionId);
     if (section) {
-      const navHeight = 80; // Height of your navigation bar
+      const navHeight = 80;
       const sectionTop = section.offsetTop - navHeight;
       window.scrollTo({
         top: sectionTop,
@@ -75,10 +78,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
+            <button
+              onClick={() => handleNavigation('/')}
+              className="flex items-center gap-2 mb-4"
+              id="footer-logo"
+              data-gtm-category="Footer"
+              data-gtm-action="click"
+              data-gtm-label="Logo"
+            >
               <Bot className="w-8 h-8 text-blue-400" />
               <span className="text-xl font-bold text-white">Slate</span>
-            </Link>
+            </button>
             <p className="text-white/70 mb-6 max-w-md">
               Transform your customer interactions with AI-powered brilliance. 
               Available 24/7, fluent in 100+ languages, and always learning.
@@ -92,6 +102,10 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.name}
+                  id={`footer-social-${item.name.toLowerCase()}`}
+                  data-gtm-category="Footer"
+                  data-gtm-action="click"
+                  data-gtm-label={`Social - ${item.name}`}
                 >
                   <item.icon className="w-5 h-5" />
                 </a>
@@ -109,16 +123,24 @@ export function Footer() {
                     <button
                       onClick={() => handleScroll(item.href)}
                       className="text-white/70 hover:text-white transition-colors"
+                      id={`footer-section-${item.href}`}
+                      data-gtm-category="Footer"
+                      data-gtm-action="click"
+                      data-gtm-label={`Section - ${item.name}`}
                     >
                       {item.name}
                     </button>
                   ) : (
-                    <Link
-                      to={item.href}
+                    <button
+                      onClick={() => handleNavigation(item.href)}
                       className="text-white/70 hover:text-white transition-colors"
+                      id={`footer-nav-${item.href.replace('/', '')}`}
+                      data-gtm-category="Footer"
+                      data-gtm-action="click"
+                      data-gtm-label={`Navigation - ${item.name}`}
                     >
                       {item.name}
-                    </Link>
+                    </button>
                   )}
                 </li>
               ))}
@@ -130,12 +152,16 @@ export function Footer() {
             <ul className="space-y-3">
               {links.legal.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    to={item.href}
+                  <button
+                    onClick={() => handleNavigation(item.href)}
                     className="text-white/70 hover:text-white transition-colors"
+                    id={`footer-legal-${item.href.replace('/', '')}`}
+                    data-gtm-category="Footer"
+                    data-gtm-action="click"
+                    data-gtm-label={`Legal - ${item.name}`}
                   >
                     {item.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

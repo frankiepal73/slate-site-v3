@@ -121,9 +121,14 @@ export function GetStarted() {
   const currentStepData = steps[currentStep];
 
   return (
-    <div className="min-h-screen bg-slate-900 pt-32 pb-20">
+    <div 
+      className="min-h-screen bg-slate-900 pt-32 pb-20"
+      id="get-started-page"
+      data-gtm-category="Get Started"
+      data-gtm-action="view"
+      data-gtm-label="Get Started Page"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
             <Bot className="w-8 h-8 text-blue-400" />
@@ -140,14 +145,17 @@ export function GetStarted() {
 
         <FormProgress steps={steps} currentStep={currentStep} />
 
-        {/* Error message */}
         {(error || emailError) && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+          <div 
+            className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm"
+            id="form-error-message"
+            role="alert"
+            aria-live="polite"
+          >
             {emailError || error}
           </div>
         )}
 
-        {/* Form */}
         <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 rounded-2xl mb-8">
           <div>
             <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
@@ -184,7 +192,6 @@ export function GetStarted() {
           </div>
         </div>
 
-        {/* Navigation buttons */}
         <div className="flex justify-between">
           <button
             onClick={handlePrev}
@@ -194,6 +201,10 @@ export function GetStarted() {
                 : 'hover:bg-white/10'
             }`}
             disabled={currentStep === 0}
+            id="form-prev-button"
+            data-gtm-category="Form Navigation"
+            data-gtm-action="click"
+            data-gtm-label="Previous Step"
           >
             <ArrowLeft className="w-5 h-5" />
             Previous
@@ -203,6 +214,10 @@ export function GetStarted() {
             onClick={handleNext}
             disabled={isSubmitting}
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+            id="form-next-button"
+            data-gtm-category="Form Navigation"
+            data-gtm-action="click"
+            data-gtm-label={currentStep === steps.length - 1 ? "Submit Form" : "Next Step"}
           >
             {isSubmitting ? (
               <>

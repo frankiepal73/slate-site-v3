@@ -38,15 +38,16 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check initial position
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
+    // Doubled from 10000 to 20000 (20 seconds)
     compactTimerRef.current = setTimeout(() => {
       setIsCompact(true);
-    }, 10000); // Increased from 5000 to 10000 (10 seconds)
+    }, 20000);
 
     return () => {
       if (compactTimerRef.current) {
@@ -90,7 +91,13 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
   const seconds = Math.floor((timeLeft / 1000) % 60);
 
   return (
-    <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-fade-in transition-all duration-300 ease-in-out">
+    <div 
+      className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-fade-in transition-all duration-300 ease-in-out"
+      id="countdown-timer"
+      data-gtm-category="Timer"
+      data-gtm-action="view"
+      data-gtm-label="Discount Timer"
+    >
       <div className={`
         flex items-center justify-center gap-3
         bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-xl 
@@ -102,16 +109,32 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
           : 'px-6 py-3 rounded-full min-w-[300px]'
         }
       `}>
-        <Timer className={`
-          text-blue-400 flex-shrink-0 transition-all duration-300
-          ${isCompact ? 'w-4 h-4' : 'w-5 h-5'}
-        `} />
+        <Timer 
+          className={`
+            text-blue-400 flex-shrink-0 transition-all duration-300
+            ${isCompact ? 'w-4 h-4' : 'w-5 h-5'}
+          `} 
+        />
         <div className="text-white flex items-center gap-2 whitespace-nowrap">
-          <span className={`font-bold tabular-nums ${isCompact ? 'text-sm' : 'text-base'}`}>
+          <span 
+            className={`font-bold tabular-nums ${isCompact ? 'text-sm' : 'text-base'}`}
+            id="countdown-timer-value"
+            data-gtm-category="Timer"
+            data-gtm-action="update"
+            data-gtm-label="Timer Value"
+          >
             {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
           </span>
           {!isCompact && (
-            <span className="text-white/70 text-base">left to claim your 20% discount!</span>
+            <span 
+              className="text-white/70 text-base"
+              id="countdown-timer-text"
+              data-gtm-category="Timer"
+              data-gtm-action="view"
+              data-gtm-label="Timer Text"
+            >
+              left to claim your 20% discount!
+            </span>
           )}
         </div>
       </div>

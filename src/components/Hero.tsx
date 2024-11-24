@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Star, Zap, Clock, Target, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CountdownTimer } from './CountdownTimer';
 
 const socialProof = [
@@ -10,6 +10,7 @@ const socialProof = [
 ];
 
 export function Hero() {
+  const navigate = useNavigate();
   const [showDiscount, setShowDiscount] = useState(true);
   const [hasDiscount] = useState(() => {
     const discountTimeLeft = sessionStorage.getItem('discountTimeLeft');
@@ -22,6 +23,10 @@ export function Hero() {
 
   const handleTimerComplete = () => {
     setShowDiscount(false);
+  };
+
+  const handleGetStarted = () => {
+    navigate('/get-started');
   };
 
   return (
@@ -130,8 +135,8 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col gap-4 items-center mb-12 max-w-sm mx-auto">
-          <Link 
-            to="/get-started"
+          <button 
+            onClick={handleGetStarted}
             className="w-full group relative px-10 py-5 bg-blue-500 rounded-2xl text-lg text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
             id="hero-cta"
             data-gtm-category="CTA"
@@ -142,7 +147,7 @@ export function Hero() {
             <span className="relative flex items-center justify-center gap-2">
               Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-5 h-5" />
             </span>
-          </Link>
+          </button>
         </div>
 
         {/* Scroll indicator */}
