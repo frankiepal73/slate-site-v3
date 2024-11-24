@@ -5,16 +5,32 @@ interface SingleCheckboxFieldProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   required?: boolean;
+  id?: string;
+  'data-gtm-category'?: string;
+  'data-gtm-action'?: string;
+  'data-gtm-label'?: string;
 }
 
-export function SingleCheckboxField({ text, checked, onChange, required }: SingleCheckboxFieldProps) {
+export function SingleCheckboxField({ 
+  text, 
+  checked, 
+  onChange, 
+  required,
+  id,
+  ...gtmProps
+}: SingleCheckboxFieldProps) {
   return (
-    <label className="flex items-start gap-2 cursor-pointer group">
+    <label 
+      htmlFor={id}
+      className="flex items-start gap-2 cursor-pointer group"
+    >
       <input
+        id={id}
         type="checkbox"
         className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 mt-1"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
+        {...gtmProps}
       />
       <span className="text-white group-hover:text-white/90 transition-colors">
         {text}

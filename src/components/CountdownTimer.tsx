@@ -46,7 +46,7 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
   useEffect(() => {
     compactTimerRef.current = setTimeout(() => {
       setIsCompact(true);
-    }, 5000);
+    }, 10000); // Increased from 5000 to 10000 (10 seconds)
 
     return () => {
       if (compactTimerRef.current) {

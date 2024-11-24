@@ -25,7 +25,13 @@ export function Hero() {
   };
 
   return (
-    <div className="relative min-h-[90vh] overflow-hidden bg-slate-900">
+    <div 
+      className="relative min-h-[90vh] overflow-hidden bg-slate-900"
+      id="hero-section"
+      data-gtm-category="Hero"
+      data-gtm-action="view"
+      data-gtm-label="Hero Section"
+    >
       {/* Show countdown timer if discount is available */}
       {showDiscount && (
         <CountdownTimer 
@@ -66,7 +72,13 @@ export function Hero() {
 
         {/* Rating Pill */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 animate-pulse hover:bg-white/10 transition-all">
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 animate-pulse hover:bg-white/10 transition-all"
+            id="hero-rating"
+            data-gtm-category="Hero"
+            data-gtm-action="view"
+            data-gtm-label="Rating Badge"
+          >
             <div className="flex">
               <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
               <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
@@ -104,6 +116,10 @@ export function Hero() {
               <span 
                 key={index}
                 className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl text-white/70 text-sm flex items-center gap-2 hover:bg-white/10 transition-colors"
+                id={`social-proof-${index}`}
+                data-gtm-category="Hero"
+                data-gtm-action="view"
+                data-gtm-label={`Social Proof - ${item.label}`}
               >
                 <item.icon className="w-4 h-4 text-blue-400" />
                 <span className="font-semibold text-white">{item.metric}</span>
@@ -117,6 +133,10 @@ export function Hero() {
           <Link 
             to="/get-started"
             className="w-full group relative px-10 py-5 bg-blue-500 rounded-2xl text-lg text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
+            id="hero-cta"
+            data-gtm-category="CTA"
+            data-gtm-action="click"
+            data-gtm-label="Hero - Convert More With AI"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
             <span className="relative flex items-center justify-center gap-2">
@@ -127,7 +147,13 @@ export function Hero() {
 
         {/* Scroll indicator */}
         <div className="flex justify-center w-full">
-          <div className="w-8 h-12 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
+          <div 
+            className="w-8 h-12 rounded-full border-2 border-white/20 flex items-start justify-center p-2"
+            id="scroll-indicator"
+            data-gtm-category="Hero"
+            data-gtm-action="view"
+            data-gtm-label="Scroll Indicator"
+          >
             <div className="w-1 h-3 bg-white/20 rounded-full animate-bounce"></div>
           </div>
         </div>
