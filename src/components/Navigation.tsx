@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Bot, Menu, X, Sparkles } from 'lucide-react';
 
 export function Navigation() {
-  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasDiscount] = useState(() => {
@@ -14,6 +13,7 @@ export function Navigation() {
     }
     return false;
   });
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -156,11 +156,11 @@ export function Navigation() {
               id="nav-cta-mobile"
               data-gtm-category="CTA"
               data-gtm-action="click"
-              data-gtm-label="Mobile Nav - Convert More With AI"
+              data-gtm-label="Mobile Nav - Start Converting"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
               <span className="relative flex items-center gap-2">
-                Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
+                Start Converting {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
               </span>
             </button>
             <button 
@@ -262,11 +262,11 @@ export function Navigation() {
                 id="mobile-nav-cta"
                 data-gtm-category="CTA"
                 data-gtm-action="click"
-                data-gtm-label="Mobile Menu - Convert More With AI"
+                data-gtm-label="Mobile Menu - Start Converting"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
                 <span className="relative flex items-center justify-center gap-2">
-                  Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
+                  Start Converting {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
                 </span>
               </button>
             </div>

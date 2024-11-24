@@ -19,8 +19,8 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
     return hasDiscount ? Math.floor(numericPrice * 0.8) : numericPrice;
   };
 
-  const isPremium = pkg.name === 'Premium Package';
   const packageId = pkg.name.toLowerCase().replace(/\s+/g, '-');
+  const isPremium = pkg.name === 'Premium Package';
 
   return (
     <button
@@ -42,12 +42,12 @@ export function PackageCard({ pkg, isSelected, hasDiscount, onSelect }: PackageC
       role="radio"
     >
       {isPremium && (
-        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
-          <span className="inline-flex items-center gap-1.5 py-2 px-4 rounded-full text-base font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white">
+        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
+          <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full text-base font-medium bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25">
             <Sparkles className="w-4 h-4" />
             Best Value
             <Sparkles className="w-4 h-4" />
-          </span>
+          </div>
         </div>
       )}
       
