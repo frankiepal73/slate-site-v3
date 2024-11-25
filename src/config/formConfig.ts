@@ -77,6 +77,7 @@ export const steps = [
     fields: [
       { label: "Full Name", type: "text", placeholder: "Enter your full name", required: true },
       { label: "Email", type: "email", placeholder: "you@company.com", required: true },
+      { label: "Phone", type: "tel", placeholder: "Enter your phone number", required: true },
       { 
         label: "Contact Consent", 
         type: "single-checkbox", 

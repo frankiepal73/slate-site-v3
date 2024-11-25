@@ -156,82 +156,96 @@ export function GetStarted() {
           </div>
         )}
 
-        <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 rounded-2xl mb-8">
-          <div>
-            <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
-            {currentStepData.subtitle && (
-              <p className="text-white/70 mb-8">{currentStepData.subtitle}</p>
-            )}
-            <div className="space-y-6">
-              {currentStepData.fields?.map((field, fieldIndex) => (
-                <div key={fieldIndex}>
-                  {field.type === 'package-select' ? (
-                    <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                      {field.packages.map((pkg: any) => (
-                        <PackageCard
-                          key={pkg.name}
-                          pkg={pkg}
-                          isSelected={formData[`${currentStepData.title}-${field.label}`] === pkg.name}
-                          hasDiscount={hasDiscount}
-                          onSelect={() => handleInputChange(`${currentStepData.title}-${field.label}`, pkg.name)}
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <FormField
-                      field={field}
-                      value={formData[`${currentStepData.title}-${field.label}`]}
-                      onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
-                      error={field.type === 'email' ? emailError : undefined}
-                      stepTitle={currentStepData.title}
-                    />
-                  )}
-                </div>
-              ))}
+        <form 
+          id="get-started-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleNext();
+          }}
+          className="space-y-8"
+          data-gtm-category="Form"
+          data-gtm-action="submit"
+          data-gtm-label="Get Started Form"
+        >
+          <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 rounded-2xl mb-8">
+            <div>
+              <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
+              {currentStepData.subtitle && (
+                <p className="text-white/70 mb-8">{currentStepData.subtitle}</p>
+              )}
+              <div className="space-y-6">
+                {currentStepData.fields?.map((field, fieldIndex) => (
+                  <div key={fieldIndex}>
+                    {field.type === 'package-select' ? (
+                      <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
+                        {field.packages.map((pkg: any) => (
+                          <PackageCard
+                            key={pkg.name}
+                            pkg={pkg}
+                            isSelected={formData[`${currentStepData.title}-${field.label}`] === pkg.name}
+                            hasDiscount={hasDiscount}
+                            onSelect={() => handleInputChange(`${currentStepData.title}-${field.label}`, pkg.name)}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <FormField
+                        field={field}
+                        value={formData[`${currentStepData.title}-${field.label}`]}
+                        onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
+                        error={field.type === 'email' ? emailError : undefined}
+                        stepTitle={currentStepData.title}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-between">
-          <button
-            onClick={handlePrev}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
-              currentStep === 0
-                ? 'opacity-50 cursor-not-allowed'
-                : 'hover:bg-white/10'
-            }`}
-            disabled={currentStep === 0}
-            id="form-prev-button"
-            data-gtm-category="Form Navigation"
-            data-gtm-action="click"
-            data-gtm-label="Previous Step"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Previous
-          </button>
-          
-          <button
-            onClick={handleNext}
-            disabled={isSubmitting}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
-            id="form-next-button"
-            data-gtm-category="Form Navigation"
-            data-gtm-action="click"
-            data-gtm-label={currentStep === steps.length - 1 ? "Submit Form" : "Next Step"}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Submitting...
-              </>
-            ) : (
-              <>
-                {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
-                <ArrowRight className="w-5 h-5" />
-              </>
-            )}
-          </button>
-        </div>
+          <div className="flex justify-between">
+            <button
+              type="button"
+              onClick={handlePrev}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
+                currentStep === 0
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:bg-white/10'
+              }`}
+              disabled={currentStep === 0}
+              id="form-prev-button"
+              data-gtm-category="Form Navigation"
+              data-gtm-action="click"
+              data-gtm-label="Previous Step"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Previous
+            </button>
+            
+            <button
+              type={currentStep === steps.length - 1 ? 'submit' : 'button'}
+              onClick={currentStep === steps.length - 1 ? undefined : handleNext}
+              disabled={isSubmitting}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+              id="form-next-button"
+              data-gtm-category="Form Navigation"
+              data-gtm-action="click"
+              data-gtm-label={currentStep === steps.length - 1 ? "Submit Form" : "Next Step"}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
+            </button>
+          </div>
+        </form>
       </div>
 
       <SuccessModal 
