@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Bot, Building2, Users2, MessageSquare, ArrowRight, ArrowLeft, Check, Loader2, Package } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { submitFormData } from '../services/formService';
-import { PackageCard } from '../components/forms/PackageCard';
+import { Bot, Building2, Users2, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 import { FormProgress } from '../components/forms/FormProgress';
-import { SuccessModal } from '../components/forms/SuccessModal';
 import { FormField } from '../components/forms/FormField';
+import { SuccessModal } from '../components/forms/SuccessModal';
+import { submitFormData } from '../services/formService';
 import type { FormData } from '../types/form';
 import { steps } from '../config/formConfig';
 
 export function GetStarted() {
-  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -118,11 +115,9 @@ export function GetStarted() {
     }
   };
 
-  const currentStepData = steps[currentStep];
-
   return (
     <div 
-      className="min-h-screen bg-slate-900 pt-32 pb-20"
+      className="min-h-screen bg-gray-50 pt-32 pb-20"
       id="get-started-page"
       data-gtm-category="Get Started"
       data-gtm-action="view"
@@ -130,15 +125,15 @@ export function GetStarted() {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
-            <Bot className="w-8 h-8 text-blue-400" />
+          <div className="inline-flex items-center justify-center p-2 bg-primary-500/10 rounded-full mb-6">
+            <Bot className="w-8 h-8 text-primary-500" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Let's customize your chatbot for your business needs
           </h1>
           {hasDiscount && (
-            <div className="mt-4 inline-block px-4 py-2 bg-blue-500/20 rounded-full">
-              <span className="text-blue-400 font-medium">20% discount applied!</span>
+            <div className="mt-4 inline-block px-4 py-2 bg-primary-500/10 rounded-full">
+              <span className="text-primary-600 font-medium">20% discount applied!</span>
             </div>
           )}
         </div>
@@ -147,7 +142,7 @@ export function GetStarted() {
 
         {(error || emailError) && (
           <div 
-            className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm"
+            className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm"
             id="form-error-message"
             role="alert"
             aria-live="polite"
@@ -167,36 +162,22 @@ export function GetStarted() {
           data-gtm-action="submit"
           data-gtm-label="Get Started Form"
         >
-          <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-8 rounded-2xl mb-8">
+          <div className="bg-white p-4 sm:p-8 rounded-2xl mb-8 shadow-sm border border-gray-200">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-2">{currentStepData.title}</h2>
-              {currentStepData.subtitle && (
-                <p className="text-white/70 mb-8">{currentStepData.subtitle}</p>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">{steps[currentStep].title}</h2>
+              {steps[currentStep].subtitle && (
+                <p className="text-gray-600 mb-8">{steps[currentStep].subtitle}</p>
               )}
               <div className="space-y-6">
-                {currentStepData.fields?.map((field, fieldIndex) => (
+                {steps[currentStep].fields?.map((field, fieldIndex) => (
                   <div key={fieldIndex}>
-                    {field.type === 'package-select' ? (
-                      <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                        {field.packages.map((pkg: any) => (
-                          <PackageCard
-                            key={pkg.name}
-                            pkg={pkg}
-                            isSelected={formData[`${currentStepData.title}-${field.label}`] === pkg.name}
-                            hasDiscount={hasDiscount}
-                            onSelect={() => handleInputChange(`${currentStepData.title}-${field.label}`, pkg.name)}
-                          />
-                        ))}
-                      </div>
-                    ) : (
-                      <FormField
-                        field={field}
-                        value={formData[`${currentStepData.title}-${field.label}`]}
-                        onChange={(value) => handleInputChange(`${currentStepData.title}-${field.label}`, value)}
-                        error={field.type === 'email' ? emailError : undefined}
-                        stepTitle={currentStepData.title}
-                      />
-                    )}
+                    <FormField
+                      field={field}
+                      value={formData[`${steps[currentStep].title}-${field.label}`]}
+                      onChange={(value) => handleInputChange(`${steps[currentStep].title}-${field.label}`, value)}
+                      error={field.type === 'email' ? emailError : undefined}
+                      stepTitle={steps[currentStep].title}
+                    />
                   </div>
                 ))}
               </div>
@@ -207,10 +188,10 @@ export function GetStarted() {
             <button
               type="button"
               onClick={handlePrev}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-gray-700 font-medium transition-all ${
                 currentStep === 0
                   ? 'opacity-50 cursor-not-allowed'
-                  : 'hover:bg-white/10'
+                  : 'hover:bg-gray-100'
               }`}
               disabled={currentStep === 0}
               id="form-prev-button"
@@ -226,7 +207,7 @@ export function GetStarted() {
               type={currentStep === steps.length - 1 ? 'submit' : 'button'}
               onClick={currentStep === steps.length - 1 ? undefined : handleNext}
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white hover:bg-white/10"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30"
               id="form-next-button"
               data-gtm-category="Form Navigation"
               data-gtm-action="click"

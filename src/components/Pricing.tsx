@@ -97,31 +97,31 @@ export function Pricing() {
   };
 
   return (
-    <div id="pricing" className="relative bg-slate-900 py-32">
+    <div id="pricing" className="relative bg-gray-50 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent)]"></div>
       
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Simple, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">transparent</span> pricing
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Simple, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">transparent</span> pricing
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-4">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
             Choose the perfect plan to transform your customer experience
           </p>
-          <div className="inline-block px-4 py-2 bg-blue-500/20 rounded-full">
-            <p className="text-xl text-blue-400 font-semibold">You only pay for what you need</p>
+          <div className="inline-block px-4 py-2 bg-primary-500/10 rounded-full">
+            <p className="text-xl text-primary-600 font-semibold">You only pay for what you need</p>
           </div>
           <div className="mt-6 max-w-2xl mx-auto">
-            <p className="text-white/70">
-              50 free conversations are included per month. For each additional <span className="text-blue-400 font-semibold">10 conversations</span>, 
-              <span className="text-blue-400"> $1</span> will be added for the Standard Assistant, 
-              <span className="text-blue-400"> $2</span> for the Advanced Assistant, and 
-              <span className="text-blue-400"> $3</span> for the Premium Package.
+            <p className="text-gray-600">
+              50 free conversations are included per month. For each additional <span className="text-primary-600 font-semibold">10 conversations</span>, 
+              <span className="text-primary-600"> $1</span> will be added for the Standard Assistant, 
+              <span className="text-primary-600"> $2</span> for the Advanced Assistant, and 
+              <span className="text-primary-600"> $3</span> for the Premium Package.
             </p>
           </div>
           {hasDiscount && (
             <div className="mt-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full text-blue-400 font-semibold">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/10 rounded-full text-primary-600 font-semibold">
                 <Sparkles className="w-4 h-4" />
                 20% Discount Applied!
                 <Sparkles className="w-4 h-4" />
@@ -140,12 +140,12 @@ export function Pricing() {
               data-gtm-action="view"
               data-gtm-label={tier.name}
             >
-              <div className={`h-full relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 ${
-                tier.featured ? 'border-2 border-blue-500/30' : ''
+              <div className={`h-full relative bg-white p-8 rounded-2xl hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md border border-gray-200 ${
+                tier.featured ? 'border-2 border-primary-500/30' : ''
               }`}>
                 {tier.featured && (
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
-                    <div className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-lg font-semibold bg-gradient-to-r from-blue-400 to-purple-400 text-white shadow-lg shadow-blue-500/25">
+                    <div className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-lg font-semibold bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg shadow-primary-500/25">
                       <Sparkles className="w-5 h-5" />
                       Best Value
                       <Sparkles className="w-5 h-5" />
@@ -153,38 +153,38 @@ export function Pricing() {
                   </div>
                 )}
 
-                <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
+                <div className="absolute -inset-px bg-gradient-to-r from-primary-500/5 to-secondary-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
                 <div className="relative">
-                  <h3 className="text-2xl font-bold text-white mb-4">{tier.name}</h3>
-                  <p className="text-white/70 mb-8">{tier.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{tier.name}</h3>
+                  <p className="text-gray-600 mb-8">{tier.description}</p>
                   
                   <div className="mb-8">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl md:text-5xl font-bold text-white">
+                      <span className="text-4xl md:text-5xl font-bold text-gray-900">
                         {hasDiscount ? (
                           <>
-                            <span className="line-through text-white/50 text-2xl">${tier.setupFee}</span>
+                            <span className="line-through text-gray-400 text-2xl">${tier.setupFee}</span>
                             {' '}
-                            <span className="text-blue-400">${calculateDiscountedPrice(tier.setupFee)}</span>
+                            <span className="text-primary-500">${calculateDiscountedPrice(tier.setupFee)}</span>
                           </>
                         ) : (
                           `$${tier.setupFee}`
                         )}
                       </span>
-                      <span className="text-white/70">setup & configuration</span>
+                      <span className="text-gray-600">setup & configuration</span>
                     </div>
                     <div className="mt-2 flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-white">${tier.monthlyPrice}</span>
-                      <span className="text-white/70">/month</span>
+                      <span className="text-2xl font-bold text-gray-900">${tier.monthlyPrice}</span>
+                      <span className="text-gray-600">/month</span>
                     </div>
                   </div>
 
                   <div className="space-y-4 mb-8">
                     {tier.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-3">
-                        <feature.icon className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                        <span className="text-white/90">{feature.text}</span>
+                        <feature.icon className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                        <span className="text-gray-700">{feature.text}</span>
                       </div>
                     ))}
                   </div>
@@ -193,8 +193,8 @@ export function Pricing() {
                     onClick={handleGetStarted}
                     className={`w-full py-4 px-8 rounded-xl font-medium text-center transition-all ${
                       tier.featured
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/25'
-                        : 'bg-white/10 text-white hover:bg-white/20'
+                        ? 'bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30'
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                     }`}
                     id={`pricing-cta-${index}`}
                     data-gtm-category="CTA"
@@ -210,11 +210,11 @@ export function Pricing() {
         </div>
 
         <div className="text-center mt-32">
-          <h2 className="text-3xl font-bold text-white mb-8">Ready for Takeoff? 🚀</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">Ready for Takeoff? 🚀</h2>
           
           <button
             onClick={handleGetStarted}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-primary-500 text-white font-medium hover:bg-primary-600 shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all"
             id="pricing-bottom-cta"
             data-gtm-category="CTA"
             data-gtm-action="click"

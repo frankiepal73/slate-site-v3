@@ -73,7 +73,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 border-t border-white/10">
+    <footer className="bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
@@ -86,10 +86,10 @@ export function Footer() {
               data-gtm-action="click"
               data-gtm-label="Logo"
             >
-              <Bot className="w-8 h-8 text-blue-400" />
-              <span className="text-xl font-bold text-white">Slate</span>
+              <Bot className="w-8 h-8 text-primary-500" />
+              <span className="text-xl font-bold text-gray-900">Slate</span>
             </button>
-            <p className="text-white/70 mb-6 max-w-md">
+            <p className="text-gray-600 mb-6 max-w-md">
               Transform your customer interactions with AI-powered brilliance. 
               Available 24/7, fluent in 100+ languages, and always learning.
             </p>
@@ -98,7 +98,7 @@ export function Footer() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-white/50 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.name}
@@ -115,14 +115,14 @@ export function Footer() {
 
           {/* Links Columns */}
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h3>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Product</h3>
             <ul className="space-y-3">
               {links.product.map((item) => (
                 <li key={item.name}>
                   {item.isSection ? (
                     <button
                       onClick={() => handleScroll(item.href)}
-                      className="text-white/70 hover:text-white transition-colors"
+                      className="text-gray-600 hover:text-gray-900 transition-colors"
                       id={`footer-section-${item.href}`}
                       data-gtm-category="Footer"
                       data-gtm-action="click"
@@ -133,7 +133,7 @@ export function Footer() {
                   ) : (
                     <button
                       onClick={() => handleNavigation(item.href)}
-                      className="text-white/70 hover:text-white transition-colors"
+                      className="text-gray-600 hover:text-gray-900 transition-colors"
                       id={`footer-nav-${item.href.replace('/', '')}`}
                       data-gtm-category="Footer"
                       data-gtm-action="click"
@@ -148,13 +148,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Legal</h3>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Legal</h3>
             <ul className="space-y-3">
               {links.legal.map((item) => (
                 <li key={item.name}>
                   <button
                     onClick={() => handleNavigation(item.href)}
-                    className="text-white/70 hover:text-white transition-colors"
+                    className="text-gray-600 hover:text-gray-900 transition-colors"
                     id={`footer-legal-${item.href.replace('/', '')}`}
                     data-gtm-category="Footer"
                     data-gtm-action="click"

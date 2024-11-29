@@ -69,18 +69,18 @@ export function Testimonials() {
   };
 
   return (
-    <div className="relative bg-slate-900 py-24">
+    <div className="relative bg-gray-50 py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(147,51,234,0.1),transparent)]"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-2 bg-blue-500/10 rounded-full mb-6">
-            <Star className="w-8 h-8 text-blue-400" />
+          <div className="inline-flex items-center justify-center p-2 bg-primary-500/10 rounded-full mb-6">
+            <Star className="w-8 h-8 text-primary-500" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Business Leaders</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">Business Leaders</span>
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             See why businesses trust Slate to drive growth and deliver exceptional customer experiences.
           </p>
         </div>
@@ -89,16 +89,16 @@ export function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group relative bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:bg-white/10 transition-all duration-300"
+              className="group relative bg-white p-8 rounded-2xl hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md border border-gray-200"
               id={`testimonial-${index}`}
               data-gtm-category="Testimonial"
               data-gtm-action="view"
               data-gtm-label={`Testimonial ${index + 1}`}
             >
-              <div className="absolute -inset-px bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
+              <div className="absolute -inset-px bg-gradient-to-r from-primary-500/5 to-secondary-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
               
               <div className="relative">
-                <div className="absolute -top-4 -left-2 text-blue-400/20 transform -rotate-12">
+                <div className="absolute -top-4 -left-2 text-primary-500/20 transform -rotate-12">
                   <Quote className="w-12 h-12" />
                 </div>
 
@@ -109,19 +109,19 @@ export function Testimonials() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full w-fit">
-                    <testimonial.icon className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-blue-400 whitespace-nowrap">{testimonial.highlight}</span>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-primary-500/10 rounded-full w-fit">
+                    <testimonial.icon className="w-4 h-4 text-primary-500" />
+                    <span className="text-sm font-medium text-primary-600 whitespace-nowrap">{testimonial.highlight}</span>
                   </div>
                 </div>
                 
                 <div className="relative">
-                  <p className="text-white/90 mb-6 text-lg leading-relaxed whitespace-pre-line">{testimonial.content}</p>
+                  <p className="text-gray-700 mb-6 text-lg leading-relaxed whitespace-pre-line">{testimonial.content}</p>
                 </div>
                 
                 <div className="flex flex-col mt-8">
-                  <h4 className="text-white font-medium">{testimonial.name}</h4>
-                  <p className="text-white/70 text-sm">{testimonial.role}</p>
+                  <h4 className="text-gray-900 font-medium">{testimonial.name}</h4>
+                  <p className="text-gray-600 text-sm">{testimonial.role}</p>
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export function Testimonials() {
         <div className="text-center mt-16">
           <button
             onClick={handleGetStarted}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-primary-500 text-white font-medium hover:bg-primary-600 shadow-lg hover:shadow-xl shadow-primary-500/20 hover:shadow-primary-500/30 transition-all"
             id="testimonials-cta"
             data-gtm-category="CTA"
             data-gtm-action="click"

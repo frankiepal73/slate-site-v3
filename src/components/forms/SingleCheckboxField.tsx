@@ -27,7 +27,7 @@ export function SingleCheckboxField({
       <input
         id={id}
         type="checkbox"
-        className="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 mt-1"
+        className="w-4 h-4 rounded text-primary-500 focus:ring-primary-500 mt-1"
         checked={checked}
         onChange={(e) => {
           onChange(e.target.checked);
@@ -45,9 +45,9 @@ export function SingleCheckboxField({
         aria-required={required}
         {...gtmProps}
       />
-      <span className="text-white group-hover:text-white/90 transition-colors">
+      <span className="text-gray-700 group-hover:text-gray-900 transition-colors">
         {text}
-        {required && <span className="text-red-400 ml-1">*</span>}
+        {required && <span className="text-red-500 ml-1">*</span>}
       </span>
     </label>
   );

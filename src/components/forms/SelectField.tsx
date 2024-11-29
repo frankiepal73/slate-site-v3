@@ -25,14 +25,14 @@ export function SelectField({
     <div className="space-y-2">
       <label 
         htmlFor={id}
-        className="block text-sm font-medium text-white/70"
+        className="block text-sm font-medium text-gray-900"
       >
         {label}
-        {required && <span className="text-red-400 ml-1">*</span>}
+        {required && <span className="text-red-500 ml-1">*</span>}
       </label>
       <select
         id={id}
-        className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500"
         onChange={(e) => {
           onChange(e.target.value);
           // GTM tracking for option selection

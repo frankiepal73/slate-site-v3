@@ -29,16 +29,16 @@ export function InputField({
     <div className="space-y-2">
       <label 
         htmlFor={id}
-        className="block text-sm font-medium text-white/70"
+        className="block text-sm font-medium text-gray-900"
       >
         {label}
-        {required && <span className="text-red-400 ml-1">*</span>}
+        {required && <span className="text-red-500 ml-1">*</span>}
       </label>
       <input
         id={id}
         type={type}
-        className={`w-full bg-white/10 border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-          error ? 'border-red-500' : 'border-white/10'
+        className={`w-full bg-white border rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors ${
+          error ? 'border-red-500' : 'border-gray-300'
         }`}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
@@ -51,7 +51,7 @@ export function InputField({
       />
       {error && (
         <p 
-          className="text-sm text-red-400 mt-1"
+          className="text-sm text-red-600 mt-1"
           id={`${id}-error`}
           role="alert"
         >

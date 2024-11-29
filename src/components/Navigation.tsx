@@ -51,7 +51,7 @@ export function Navigation() {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/80 backdrop-blur-xl shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-lg' : 'bg-transparent'
       }`}
       role="navigation"
       aria-label="Main navigation"
@@ -67,15 +67,15 @@ export function Navigation() {
             data-gtm-action="click"
             data-gtm-label="Logo"
           >
-            <Bot className="w-8 h-8 text-blue-400" />
-            <span className="text-xl font-bold text-white">Slate</span>
+            <Bot className="w-8 h-8 text-primary-500" />
+            <span className="text-xl font-bold text-gray-900">Slate</span>
           </button>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             <button 
               onClick={() => handleNavigation('/')}
-              className="text-white/70 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
               id="nav-home-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
@@ -84,18 +84,8 @@ export function Navigation() {
               Home
             </button>
             <button 
-              onClick={() => handleNavigation('/why-us')}
-              className="text-white/70 hover:text-white transition-colors"
-              id="nav-why-us-button"
-              data-gtm-category="Navigation"
-              data-gtm-action="click"
-              data-gtm-label="Why Us"
-            >
-              Why Us
-            </button>
-            <button 
-              onClick={() => handleNavigation('/how-this-works')}
-              className="text-white/70 hover:text-white transition-colors"
+              onClick={() => scrollToSection('how-it-works')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
               id="nav-how-it-works-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
@@ -105,7 +95,7 @@ export function Navigation() {
             </button>
             <button 
               onClick={() => scrollToSection('features')}
-              className="text-white/70 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
               id="nav-features-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
@@ -115,7 +105,7 @@ export function Navigation() {
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="text-white/70 hover:text-white transition-colors"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
               id="nav-pricing-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
@@ -124,8 +114,8 @@ export function Navigation() {
               Pricing
             </button>
             <button 
-              onClick={() => handleNavigation('/faqs')}
-              className="text-white/70 hover:text-white transition-colors"
+              onClick={() => scrollToSection('faqs')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
               id="nav-faqs-button"
               data-gtm-category="Navigation"
               data-gtm-action="click"
@@ -135,15 +125,15 @@ export function Navigation() {
             </button>
             <button 
               onClick={() => handleNavigation('/get-started')}
-              className="group relative px-4 py-2.5 bg-blue-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
+              className="group relative px-4 py-2.5 bg-primary-500 rounded-xl text-white font-medium overflow-hidden transition-all hover:scale-105 hover:bg-primary-600 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 ring-2 ring-primary-400/30"
               id="nav-cta-desktop-button"
               data-gtm-category="CTA"
               data-gtm-action="click"
               data-gtm-label="Desktop Nav - Convert More With AI"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-400/0 via-primary-400/30 to-primary-400/0 animate-shimmer"></div>
               <span className="relative flex items-center gap-2">
-                Convert More With AI {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
+                Convert More With AI {hasDiscount && <span className="text-primary-100">-20%</span>} <Sparkles className="w-4 h-4" />
               </span>
             </button>
           </div>
@@ -152,19 +142,19 @@ export function Navigation() {
           <div className="lg:hidden flex items-center gap-3">
             <button 
               onClick={() => handleNavigation('/get-started')}
-              className="group relative px-3 py-2 bg-blue-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
+              className="group relative px-3 py-2 bg-primary-500 rounded-xl text-white text-sm font-medium overflow-hidden transition-all hover:scale-105 hover:bg-primary-600 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 ring-2 ring-primary-400/30"
               id="nav-cta-mobile-button"
               data-gtm-category="CTA"
               data-gtm-action="click"
               data-gtm-label="Mobile Nav - Start Converting"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-400/0 via-primary-400/30 to-primary-400/0 animate-shimmer"></div>
               <span className="relative flex items-center gap-2">
-                Start Converting {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
+                Start Converting {hasDiscount && <span className="text-primary-100">-20%</span>} <Sparkles className="w-3.5 h-3.5" />
               </span>
             </button>
             <button 
-              className="text-white p-2"
+              className="text-gray-900 p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle menu"
@@ -182,7 +172,7 @@ export function Navigation() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div 
-          className="lg:hidden bg-slate-800 border-t border-white/10"
+          className="lg:hidden bg-white border-t border-gray-200"
           role="menu"
           aria-orientation="vertical"
           id="mobile-menu"
@@ -190,7 +180,7 @@ export function Navigation() {
           <div className="px-4 py-4 space-y-4">
             <button 
               onClick={() => handleNavigation('/')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
+              className="block w-full text-left text-gray-600 hover:text-gray-900 transition-colors"
               role="menuitem"
               id="mobile-nav-home-button"
               data-gtm-category="Navigation"
@@ -200,19 +190,8 @@ export function Navigation() {
               Home
             </button>
             <button 
-              onClick={() => handleNavigation('/why-us')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
-              role="menuitem"
-              id="mobile-nav-why-us-button"
-              data-gtm-category="Navigation"
-              data-gtm-action="click"
-              data-gtm-label="Mobile - Why Us"
-            >
-              Why Us
-            </button>
-            <button 
-              onClick={() => handleNavigation('/how-this-works')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
+              onClick={() => scrollToSection('how-it-works')}
+              className="block w-full text-left text-gray-600 hover:text-gray-900 transition-colors"
               role="menuitem"
               id="mobile-nav-how-it-works-button"
               data-gtm-category="Navigation"
@@ -223,7 +202,7 @@ export function Navigation() {
             </button>
             <button 
               onClick={() => scrollToSection('features')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
+              className="block w-full text-left text-gray-600 hover:text-gray-900 transition-colors"
               role="menuitem"
               id="mobile-nav-features-button"
               data-gtm-category="Navigation"
@@ -234,7 +213,7 @@ export function Navigation() {
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
+              className="block w-full text-left text-gray-600 hover:text-gray-900 transition-colors"
               role="menuitem"
               id="mobile-nav-pricing-button"
               data-gtm-category="Navigation"
@@ -244,8 +223,8 @@ export function Navigation() {
               Pricing
             </button>
             <button 
-              onClick={() => handleNavigation('/faqs')}
-              className="block w-full text-left text-white/70 hover:text-white transition-colors"
+              onClick={() => scrollToSection('faqs')}
+              className="block w-full text-left text-gray-600 hover:text-gray-900 transition-colors"
               role="menuitem"
               id="mobile-nav-faqs-button"
               data-gtm-category="Navigation"
@@ -254,22 +233,20 @@ export function Navigation() {
             >
               FAQs
             </button>
-            <div className="pt-2">
-              <button 
-                onClick={() => handleNavigation('/get-started')}
-                className="block w-full group relative px-4 py-3 bg-blue-500 rounded-xl text-white text-center font-medium overflow-hidden transition-all hover:scale-105 hover:bg-blue-600 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 ring-2 ring-blue-400/30"
-                role="menuitem"
-                id="mobile-nav-cta-button"
-                data-gtm-category="CTA"
-                data-gtm-action="click"
-                data-gtm-label="Mobile Menu - Start Converting"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 animate-shimmer"></div>
-                <span className="relative flex items-center justify-center gap-2">
-                  Start Converting {hasDiscount && <span className="text-blue-100">-20%</span>} <Sparkles className="w-4 h-4" />
-                </span>
-              </button>
-            </div>
+            <button 
+              onClick={() => handleNavigation('/get-started')}
+              className="block w-full group relative px-4 py-3 bg-primary-500 rounded-xl text-white text-center font-medium overflow-hidden transition-all hover:scale-105 hover:bg-primary-600 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 ring-2 ring-primary-400/30"
+              role="menuitem"
+              id="mobile-nav-cta-button"
+              data-gtm-category="CTA"
+              data-gtm-action="click"
+              data-gtm-label="Mobile Menu - Start Converting"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-400/0 via-primary-400/30 to-primary-400/0 animate-shimmer"></div>
+              <span className="relative flex items-center justify-center gap-2">
+                Start Converting {hasDiscount && <span className="text-primary-100">-20%</span>} <Sparkles className="w-4 h-4" />
+              </span>
+            </button>
           </div>
         </div>
       )}

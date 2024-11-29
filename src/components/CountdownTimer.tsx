@@ -100,10 +100,10 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
     >
       <div className={`
         flex items-center justify-center gap-3
-        bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-xl 
-        border border-white/20 shadow-lg
+        bg-white/80 backdrop-blur-xl 
+        border border-gray-200 shadow-lg
         transition-all duration-300 ease-in-out
-        hover:bg-white/5
+        hover:bg-white/90
         ${isCompact 
           ? 'px-4 py-2.5 rounded-full min-w-[160px]' 
           : 'px-6 py-3 rounded-full min-w-[300px]'
@@ -111,11 +111,11 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
       `}>
         <Timer 
           className={`
-            text-blue-400 flex-shrink-0 transition-all duration-300
+            text-primary-500 flex-shrink-0 transition-all duration-300
             ${isCompact ? 'w-4 h-4' : 'w-5 h-5'}
           `} 
         />
-        <div className="text-white flex items-center gap-2 whitespace-nowrap">
+        <div className="text-gray-900 flex items-center gap-2 whitespace-nowrap">
           <span 
             className={`font-bold tabular-nums ${isCompact ? 'text-sm' : 'text-base'}`}
             id="countdown-timer-value"
@@ -127,7 +127,7 @@ export function CountdownTimer({ initialMinutes, onComplete }: CountdownTimerPro
           </span>
           {!isCompact && (
             <span 
-              className="text-white/70 text-base"
+              className="text-gray-600 text-base"
               id="countdown-timer-text"
               data-gtm-category="Timer"
               data-gtm-action="view"
