@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Zap, Clock, TrendingUp } from 'lucide-react';
+import { Sparkles, MessageSquare, Store, Brain, Globe2, Zap, Clock, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CountdownTimer } from './CountdownTimer';
 import { RatingBadge } from './RatingBadge';
@@ -63,13 +63,6 @@ export function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="flex justify-center mb-4">
-          <div className="relative">
-            <Bot className="w-16 h-16 text-primary-500 animate-pulse" />
-            <div className="absolute -inset-2 bg-primary-500/20 blur-xl rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
         <div className="flex justify-center mb-6">
           <RatingBadge />
         </div>
