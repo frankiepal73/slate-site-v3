@@ -1,31 +1,13 @@
 import React, { useState } from 'react';
-import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Star, Zap, Clock, TrendingUp } from 'lucide-react';
+import { Bot, Sparkles, MessageSquare, Store, Brain, Globe2, Zap, Clock, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CountdownTimer } from './CountdownTimer';
+import { RatingBadge } from './RatingBadge';
 
 const socialProof = [
   { metric: '~16%', label: 'Boost In Conversion Rate', icon: TrendingUp },
   { metric: '70%', label: 'Customer Support Automation', icon: MessageSquare },
   { metric: '99.9%', label: 'Uptime', icon: Clock }
-];
-
-const avatars = [
-  {
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=face",
-    alt: "Sarah Wilson"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=64&h=64&fit=crop&crop=face",
-    alt: "Michael Chen"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face",
-    alt: "Emily Rodriguez"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face",
-    alt: "David Kim"
-  }
 ];
 
 export function Hero() {
@@ -50,7 +32,7 @@ export function Hero() {
 
   return (
     <div 
-      className="relative min-h-[90vh] overflow-hidden bg-gradient-to-br from-gray-50 to-white"
+      className="relative min-h-[90vh] overflow-hidden bg-white"
       id="hero-section"
       data-gtm-category="Hero"
       data-gtm-action="view"
@@ -63,7 +45,7 @@ export function Hero() {
         />
       )}
       
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-pink-500/5 animate-gradient"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-secondary-50 to-primary-50/20"></div>
       
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float"></div>
@@ -84,48 +66,16 @@ export function Hero() {
         <div className="flex justify-center mb-4">
           <div className="relative">
             <Bot className="w-16 h-16 text-primary-500 animate-pulse" />
-            <div className="absolute -inset-2 bg-primary-500/10 blur-xl rounded-full animate-pulse"></div>
+            <div className="absolute -inset-2 bg-primary-500/20 blur-xl rounded-full animate-pulse"></div>
           </div>
         </div>
 
         <div className="flex justify-center mb-6">
-          <button 
-            className="inline-flex items-center gap-4 px-4 py-2 bg-white/80 backdrop-blur-xl rounded-full border border-gray-200 animate-pulse hover:bg-white/90 transition-all shadow-sm"
-            id="hero-rating-button"
-            data-gtm-category="Hero"
-            data-gtm-action="click"
-            data-gtm-label="Rating Badge"
-          >
-            <div className="flex">
-              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              <div className="relative w-4 h-4">
-                <Star className="absolute inset-0 w-4 h-4 text-yellow-400/20" />
-                <div className="absolute inset-0 overflow-hidden" style={{ width: '90%' }}>
-                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-gray-600 text-sm">Rated 4.9 by happy clients</span>
-              <div className="flex -space-x-2">
-                {avatars.map((avatar, index) => (
-                  <img
-                    key={index}
-                    src={avatar.src}
-                    alt={avatar.alt}
-                    className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                  />
-                ))}
-              </div>
-            </div>
-          </button>
+          <RatingBadge />
         </div>
 
         <h1 className="text-center">
-          <span className="block text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-secondary-500 to-pink-500 mb-4 animate-gradient leading-tight">
+          <span className="block text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 mb-4 animate-gradient leading-tight">
             turn your website visitors
           </span>
           <span className="block text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -143,7 +93,7 @@ export function Hero() {
             {socialProof.map((item, index) => (
               <button 
                 key={index}
-                className="px-4 py-2 rounded-full bg-white shadow-sm border border-gray-200 text-gray-600 text-sm flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 rounded-full bg-white/80 backdrop-blur-xl text-gray-600 text-sm flex items-center gap-2 hover:bg-white transition-colors border border-gray-200"
                 id={`social-proof-button-${index}`}
                 data-gtm-category="Hero"
                 data-gtm-action="click"

@@ -8,6 +8,9 @@ export function DashboardPreview() {
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center p-2 bg-primary-500/10 rounded-full mb-6">
+            <BarChart3 className="w-8 h-8 text-primary-500" />
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Powerful Analytics at Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">Fingertips</span>
           </h2>
